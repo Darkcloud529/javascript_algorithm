@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 연필 개수
+        // 연필 1다스는 12개 , 학생에게 1개씩 나눠줄때 필요한 다스의 수
+        function solution(a) {
+            let answer;
+            // 먼저 12로 나눠 떨어지는지 확인
+            // 이 때 형 변환이 필요, parseInt() 
+            answer = parseInt(a/12);
+            // 만약 나머지가 있다면 1다스 추가 
+            if(a%12 != 0) {
+                answer += 1;
+            }
+            return answer;
+        }
+        console.log(solution(111))
+    </script>
+</body>
+</html>

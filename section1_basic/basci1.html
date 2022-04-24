@@ -8,14 +8,17 @@
 </head>
 <body>
     <script>
-        // 세 수 중 최솟값 찾기 
+        // 세 수 중 최솟값 찾기
+        // 세 수를 순차적으로 비교해보기  
         function solution(a, b, c) {
             let answer;
+            // a 와 b 비교
             if(a>b) {
                 answer = a;
             } else {
                 answer = b;
             }
+            // a 와 b 중 큰 수와 c를 비교
             if(c>answer) {
                 answer = c;
             }

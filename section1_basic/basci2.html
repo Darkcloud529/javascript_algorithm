@@ -8,16 +8,26 @@
 </head>
 <body>
     <script>
+        // 삼각형 판별하기
+        // 삼각형의 조건
+        // 가장 긴 변이 나머지 두 변의 합보다 크거나 작은 경우 작각형이 될 수 없다!
+        // 가장 긴 변을 먼저 찾고 그 이후 크기 비교
         function solution(a, b, c){
             let answer="YES", max;
-            let tot=a+b+c;
-            if(a>b) max=a;
-            else max=b;
-            if(c>max) max=c;
-            if(tot-max<=max) answer="NO"; 
+            let tot = a + b + c;
+            if(a>b) {
+                max=a;
+            } else {
+                max=b;
+            }
+            if(c>max) {
+                max=c;
+            }
+            if(tot-max<=max) {
+                answer="NO";
+            } 
             return answer;
         }
-
         console.log(solution(13, 33, 17));
     </script>
 </body>
