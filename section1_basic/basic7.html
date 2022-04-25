@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            차량 10부제
+            1. 주어진 날짜와 7대의 자동차 번호 끝 두자리 비교
+            2. 10부제를 위반하는 차량의 대수 확인
+        */
+        function solution(day, arr) {
+            let answer=0;
+            const number = day % 10; // 주어진 날짜의 끝자리 
+            for(let i=0; i<arr.length; i++) {
+                if(arr[i]%10 == number) { // 차량의 끝자리 확인
+                    answer += 1;
+                }
+            }
+            return answer;
+        }
+        let arr = [12, 20, 54, 30, 87, 91, 30]
+        console.log(solution(14, arr));
+    </script>
+</body>
+</html>
