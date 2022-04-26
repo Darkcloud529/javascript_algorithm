@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            문자 찾기
+            1. 한개의 문자열을 입력받고 특정 문자를 입력 받아
+            2. 특정 문자가 입력 받은 문자열에 몇개 존재하는지
+            3. 문자열의 길이는 100을 넘지 않는다. 
+
+            해결
+            1. 특정 문자를 기준으로 문자열 나누기
+            2. 1의 과정을 거쳐서 나뉘어진 문자열에서 -1을 하면
+            특정 문자의 개수를 구할 수 있다. 
+            3. 1의 과정을 해결하기 위해 split() 메서드 활용
+        */
+       function solution (word, str) {
+           let answer = "";
+           answer = str.split(word).length -1;
+
+           return answer;
+       }
+       let str = "COMPUTERPROGRAMMING"
+       console.log(solution("R", str));
+    </script>
+</body>
+</html>

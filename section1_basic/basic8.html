@@ -8,26 +8,26 @@
 </head>
 <body>
     <script>
+        /*
+            일곱 난쟁이 찾기
+            1. 9개의 서로 다른 키
+            2. 7개의 키의 합이 100이 되는 경우 출력
+            3. 이때 배열 한 가지만이라도 출력
+        */
         function solution(arr) {
             let answer = arr;
-            let sum = 0;
-
-            for(let i=0; i<answer.length; i++) {
-                sum += answer[i];
-            }
-
+            let sum = answer.reduce((a,b) => a+b, 0)
             for(let i=0; i<answer.length-1; i++) {
                 for(let j=i+1; j<answer.length; j++) {
-                    sum = sum - (answer[i] + answer[j]);
-                    if(sum == 100) {
+                    if(sum - (answer[i] + answer[j]) == 100) {
                         answer.splice(i,1);
                         answer.splice(j,1);
                     }     
                 }
             }
-
             return answer;
         }
+
         let arr = [20, 7, 23, 19, 10, 15, 25, 8, 13];
         console.log(solution(arr));
     </script>
