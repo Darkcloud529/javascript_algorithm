@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            가장 긴 문자열 출력하기
+        */
+        function solution(array) {
+            let answer = "";
+            let max = 0;
+            for(let i=0; i<array.length; i++) {
+                if( array[i].length > max) {
+                    max = array[i].length;
+                    answer = array[i];
+                }
+            }
+            return answer;
+        }
+        let arr = ["teacher", "time", "good", "beautiful", "student"]
+        console.log(solution(arr));
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            가운데 문자열 출력
+            1. 문자열을 입력받아 가운데 문자 출력
+            2. 홀수인 경우 1개 짝수인 경우 가운데 2개 출력
+
+            해결
+            1. 문자열의 길이를 반으로 나눈 나머지를 통해 홀짝 확인
+            2. 홀수인 경우 substr()메서드를 이용해 문자의 길이 절반에서 1개 문자만 출력
+            3. 짝수인 경우 문자열 길이에서 -1 한 후 2개 문자 출력
+        */
+        function solution(word) { 
+            let answer ;
+            let number = parseInt((word.length)/2);
+            let division = (word.length)%2;
+            if(division == 0) {
+                number = number - 1;
+                answer = word.substr(number, 2);
+            } else {
+                answer = word.substr(number,1);
+            }
+            return answer;
+        }
+        let str = "good"
+        console.log(solution(str));
+    </script>
+</body>
+</html>

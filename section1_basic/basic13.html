@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            대소문자 변환
+            1. 대, 소문자가 섞인 문자열을 입력받아
+            2. 대문자 -> 소문자, 소문자 -> 대문자로 변환
+
+            해결
+            1. 문자열을 입력받아
+            2. 각 문자를 하나씩 대문자로 변환후 비교
+            3. 대문자인 경우 소문자로 변경, 대문자가 아닌 경우(소문자) 대문자로 변경
+        */
+        function solution(word) {
+            let answer = "";
+            for (let x of word) {
+                if( x === x.toUpperCase()) {
+                    answer += x.toLowerCase();
+                } else {
+                    answer += x.toUpperCase();
+                }
+            }
+            return answer;
+        }
+        let str = "StuDY";
+        console.log(solution(str));
+    </script>
+</body>
+</html>

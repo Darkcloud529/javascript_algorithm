@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            대문자로 통일
+            1. 대, 소문자가 섞인 문자열을 입력받아
+            2. 대문자로 통일해서 출력
+
+            해결
+            1. toUpperCase() 메서드를 활용
+        */
+        function solution(word) {
+            let answer = "";
+            answer = word.toUpperCase();
+            return answer;
+        }
+        let str = "ItisTimeToStudy";
+        console.log(solution(str))
+    </script>
+</body>
+</html>

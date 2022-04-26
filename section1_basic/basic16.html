@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            중복 문자 제거
+            1. 문자를 입력받은 후
+            2. 중복 문자를 제거한 문자를 출력
+        */
+        function solution (word) {
+            let answer = "";
+            for (let x of word) {
+                word = word.replace(x,"");
+            }
+            return answer;
+        }
+        let str = "ksekkset"
+        console.log(solution(str))
+    </script>
+</body>
+</html>
