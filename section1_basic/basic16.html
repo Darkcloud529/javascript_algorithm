@@ -12,11 +12,21 @@
             중복 문자 제거
             1. 문자를 입력받은 후
             2. 중복 문자를 제거한 문자를 출력
+
+            해결
+            1. 문자열을 입력받은 후 indexOf() 메서드를 활용
+            2. indexOf() 메서드는 문자열에서 왼쪽부터 찾을 문자와 일치하는 문자를 찾아 
+            제일 먼저 일치하는 문자의 인덱스 번호를 반환합니다. 
+            3. 따라서 반환하는 인덱스 번호와 문자열의 번호가 일치하다면 하나뿐인 문자이고
+            중복된다면 가장 첫번째로 등장하는 문자만 출력되고 나머지는 일치하지 않아 출력되지 않는다.  
         */
         function solution (word) {
             let answer = "";
-            for (let x of word) {
-                word = word.replace(x,"");
+            for (let i=0; i<word.length; i++) {
+                if(word.indexOf(word[i]) === i) {
+                    console.log(word.indexOf(word[i]));
+                    answer += word[i];
+                }
             }
             return answer;
         }
