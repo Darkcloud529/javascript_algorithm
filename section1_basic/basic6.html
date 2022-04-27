@@ -19,7 +19,7 @@
         */
         function solution (arr) {
             let answer=[]; 
-            let sum=0, min=100;
+            let sum=0, min=Number.MAX_SAFE_INTEGER;
             for(let i=0; i<arr.length; i++) {
                 if(arr[i]%2 === 1) { // 홀수 찾기 
                     sum += arr[i];  // 홀수만 더하기

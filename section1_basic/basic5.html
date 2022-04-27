@@ -14,17 +14,25 @@
             복수 입력 -> 배열 이용하기  
         */
         function solution(arr) {
-            let answer, min, temp;
-            answer = 0;
-            min = arr[0];
+            // min 값의 경우 Number에 내장된 안정적인 큰 숫자로 초기화 하는 것이 좋다!
+            // Number.MAX_SAFE_INTGER 사용
+            let answer, min=Number.MAX_SAFE_INTEGER;
             for(let i=0; i<arr.length; i++) {
-                temp = arr[i];
-                if(min > temp) {
-                    min = temp;
-                    answer = min;
+                if(min > arr[i]) {
+                    min = arr[i];
                 }
+                answer = min;
             }
             return answer;
+
+            // 내장 함수를 이용한 최솟값, 최댓값 구하기
+            let answer2 = Math.min(...arr); 
+            // 배열을 넣어주기 위해 => ...arr 전개 연사자 사용
+            // ...arr = arr[0], arr[1], ...
+            let answer2 = Math.max(...arr);
+
+            // 만약 전개 연산자를 사용하지 않는 경우
+            let answer3 = Math.min.apply(null, arr);
         }
         let arr = [71, 34, 12, 23, 44, 65, 38, 90]
         console.log(solution(arr));

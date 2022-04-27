@@ -13,7 +13,7 @@
         */
         function solution(array) {
             let answer = "";
-            let max = 0;
+            let max = Number.MIN_SAFE_INTEGER; // 초기화
             for(let i=0; i<array.length; i++) {
                 if( array[i].length > max) {
                     max = array[i].length;

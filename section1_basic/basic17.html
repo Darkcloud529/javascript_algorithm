@@ -23,11 +23,16 @@
         function solution(array) {
             let answer = [];
             for(let i=0; i < array.length; i++) {
-                console.log(array.search(array[0]));
                 if(array.indexOf(array[i]) === i) {
                     answer.push(array[i]);
                 }
             }
+
+            // filter 메서드를 이용하는 경우
+            let answer2;
+            answer2 = array.filter(function(v,i){
+                if(array.indexOf(v)===i) return true;
+            });
             return answer;
         }
         let arr = ["good","time","good","time","student"]

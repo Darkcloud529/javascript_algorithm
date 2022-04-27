@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <script>
+        // forEach, map, filter, reduce
+
+        // forEach문 간단 설명
+        // function forEach(함수(필수), 콜백함수)
+        // function forEach(predicate, thisArg) {
+        //     for(let i=0; i<a.length; i++) {
+        //         predicate(a[i], i);
+        //     }
+        // };
+
+
+        a=[10,11,12,13,14,15];
+        let answer = a.forEach(function(v, i){
+            console.log(v,i, this);
+        }, [1,2]);
+
+        // map 문 간단 설명
+        /*
+            function map(predicate, thisArg) {
+                let list=[];
+                for(let i=0; i<a.legnth; i++) {
+                    list.push(predicate(a[i],i));
+                }
+                return list;
+            }
+         */
+
+        // map 원본 배열과 똑같은 길이의 배열을 반환한다.
+        answer = a.map(function(v, i){
+           if(v%2==0) return v;
+        }, [1,2]);
+        console.log(answer);
+        // 그래서 일부 출력이 되지 않는 경우 undefined로 입력된다. 
+
+        // filter 문 간단 설명
+        /*
+            function filter(predicate, thisArg) {
+                let list=[];
+                for(let i=0; i<a.legnth; i++) {
+                    if(predicate(a[i],i)) list.push(predicate(a[i]));
+                }
+                return list;
+            }
+         */
+
+        //filter문은 참이되는 요소만 배열을 만들어 반환한다. 
+        answer = a.filter(function(v, i){
+            return v%2==0;
+        },2);
+        console.log(answer);
+
+
+        // reduce 문 간단 설명
+        /*
+            function reduce(predicate, val) {
+                let result=val;
+                for(let i=0; i<a.legnth; i++) {
+                    result=predicate(result, a[i])
+                }
+                return result;
+            }
+         */
+        answer = a.reduce(function(acc, value){
+            return acc+value;
+        }, 0);
+        console.log(answer);
+        
+    </script>
+</body>
+</html>
