@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            보이는 학생 수
+            1. 학생들의 키가 적혀진 배열을 입력 받습니다. 
+            2. 이때 선생님이 학생들 맨 앞에 서서 학생을 바라볼 경우 몇명이 보일까요?
+            3. 보이는 학생 수를 출력하세요. (키가 같거나 작으면 보이지 않음)
+
+            해결
+            1. 맨 앞에 학생 한 명을 카운팅함, 첫 번째 학생의 키를 기준으로 설정함.
+            2. 입력 받은 키 배열을 순차적으로 비교하여 앞에 선 친구보다 키가 큰 경우 1 증가
+            3. 그리고 기준이 되는 학생의 키(min)값을 2번 과정에서 얻은 더 큰 값으로 기준 재설정
+        */
+        function solution (arr) {
+            let answer=1;
+            let min = Number.MIN_SAFE_INTEGER;
+            min = arr[0];
+            for(let i=0; i < arr.length; i++) {
+                if(min < arr[i+1]) {
+                    min = arr[i+1];
+                    //answer.push(arr[i+1]);
+                    answer++;
+                }
+            }
+            return answer;
+        }
+        let array = [130, 135, 148, 140, 145, 150, 150, 153];
+        console.log(solution(array));
+    </script>
+</body>
+</html>
