@@ -8,6 +8,15 @@
 </head>
 <body>
     <script>
+        /*
+            큰 수 출력하기
+            1. 숫자 정보가 담긴 배열을 입력받아
+            2. 맨 앞에 숫자는 출력하고 앞에 숫자보다 큰 경우 출력하기
+
+            해결
+            1. 배열을 순차적으로 탐색하면서
+            2. 앞에 순자보다 큰 경우만 answer배열에 push한다. 
+        */
         function solution(array) {
             let answer =[];
             answer.push(array[0]);
