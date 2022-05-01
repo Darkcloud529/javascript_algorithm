@@ -7,6 +7,26 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <script>
+        /*
+            숫자만 추출
+            1. 숫자와 문자가 섞인 문자열을 입력 받음
+            2. 숫자만 추출한 후 자연수를 만들어 출력
+
+            해결
+            1. 문자열 입력받고 정규식을 통해 문자열을 제거
+            2. parseInt()를 통해 자연수 출력
+        */
+        function solution (str) {
+            let answer = "";
+            let reg = /[a-z]/gim;
+            let word = str.replace(reg, "");
+            answer = parseInt(word);
+            return answer;
+
+        }
+        let str = "g0en2T0s8eSoft";
+        console.log(solution(str));
+    </script>
 </body>
 </html>
