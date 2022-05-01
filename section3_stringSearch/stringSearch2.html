@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            유요한 팰린드롬
+            1. 문자, 숫자, 특수문자, 공백이 포함된 문자열을 입력받는다. 
+            2. 문자만 가지고 회문을 검사한다. 
+            3. 검사 결과는 yes or no로 표시
+
+            해결
+            1. 입력받은 문자열을 정규식활용해 특수문자, 숫자, 공백을 제거한다. 
+            2. 또한 대소문자 구분을 없애기 위해 대문자로 변환
+            3. 이후 회문 검사를 통해 결과 출력
+        */
+        function solution (str) {
+            let answer = "";
+            let word = "";
+            let reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/ 0-9]/gim;
+            word = str.replace(reg, "");
+            word = word.toUpperCase();
+            //console.log(word);
+            
+            let n = word.length;
+            let num = 0;
+            for(let i=0; i<n; i++) {
+                num = word.indexOf(word[i]) + word.lastIndexOf(word[i]);
+                if(num != n-1) {
+                    answer = "no";
+                    break;
+                } else {
+                    answer = "yes";
+                } 
+            }
+
+            return answer;
+        }
+        let str = "found7, time: study; Yduts; emit, 7Dnuof"
+        console.log(solution(str));
+    </script>
+</body>
+</html>
