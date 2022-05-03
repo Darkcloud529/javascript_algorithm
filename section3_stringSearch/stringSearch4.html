@@ -51,7 +51,39 @@
                 answer += "0" + " ";
             }
             return answer;
+            /*
+                다른 해결 방법
+                1. 입력받은 문자열을 왼쪽에서 오른쪽, 오른쪽에서 왼쪽으로 탐색을 실행한다. 
+                2. 왼쪽에서 오른쪽으로 탐색할때 왼쪽에 있는 key 단어와의 거리를 계산해 배열에 저장한다. 
+                만약 왼쪽에 key 단어가 없는 경우 임의의 큰 숫자(문자열보다 큰 값)로 설정한다.
+                3. 오른쪽에서 왼쪽으로 탐색할 때 다시 거리를 계산하되 배열에 저장할 때는 2번과정에서 얻은 거리 값과
+                비교해 보다 작은 값을 배열에 저장한다. 
+                4. 그리고 출력한다.  
+            */
+        //    let answer2 =[];
+        //    let p = 1000;
+        //    // 왼쪽에서 오른쪽 탐색
+        //    for(let x of word) {
+        //        if(word === key) {
+        //            p = 0;
+        //            answer.push(p);
+        //        } else {
+        //            p++;
+        //            answer.push(p);
+        //        }
+        //    }
 
+        //    // 오른쪽에서 왼쪽으로 탐색
+        //    p=1000; 
+        //    for(let i=word.length-1; i>=0; i--) {
+        //        if(word[i]===key) {
+        //            p=0;
+        //        } else {
+        //            p++;
+        //            answer[i]=Math.min(answer[i], p);
+        //        }
+        //    }
+        //    return answer2;
         }
         let str = "teaasdfaqcherwewmode";
         console.log(solution(str, 'e'));

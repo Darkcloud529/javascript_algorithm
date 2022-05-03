@@ -20,7 +20,7 @@
             3. 이후 회문 검사를 통해 결과 출력
         */
         function solution (str) {
-            let answer = "";
+            let answer = "yes";
             let word = "";
             let reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/ 0-9]/gim;
             word = str.replace(reg, "");
@@ -32,14 +32,21 @@
             for(let i=0; i<n; i++) {
                 num = word.indexOf(word[i]) + word.lastIndexOf(word[i]);
                 if(num != n-1) {
-                    answer = "no";
-                    break;
-                } else {
-                    answer = "yes";
+                    return "NO";
                 } 
             }
 
             return answer;
+
+            /*
+                다른 방법
+                1. reverse() 메서드 활용
+                2. 소문자 변환 후 소문자가 아닌 것들을 제외하면 더 쉽게 코드 작성 가능
+            */
+            // let answer2 = "yes";
+            // str = str.toLowerCase().replace(/[^a-z]/g, ''); // 소문자가 아닌 것들만 빈문자열로 변환
+            // if(s.split('').reverse().join('')!==s) return "NO";
+            // return answer2;
         }
         let str = "found7, time: study; Yduts; emit, 7Dnuof"
         console.log(solution(str));

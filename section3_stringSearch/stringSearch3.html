@@ -24,6 +24,24 @@
             answer = parseInt(word);
             return answer;
 
+            /*
+                다른 방법
+                isNaN()메서드 활용
+                문자를 탐색하며 숫자인 것만 추출
+                그리고 자연수로 만들어주기 위해 parseInt() 활용
+            */
+        //    let answer2 = "";
+        //    for(let x of str) {
+        //        if(!isNaN(x)) answer += x;
+        //    }
+        //    return parseInt(answer2);
+
+        // 만약 parseInt()를 사용할 수 없다면?
+            // let answer3 = 0;
+            // for(let x of str) {
+            //     if(!isNaN(x)) answer = answer*10 + Number(x);
+            // }
+            // return answer3;
         }
         let str = "g0en2T0s8eSoft";
         console.log(solution(str));

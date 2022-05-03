@@ -22,22 +22,42 @@
             4. 합이 같은 경우엔 yes지만 하나라도 틀린경우 무조건 no로 대답한 후 break한다. 
         */
         function solution (str) {
-            let answer ="";
+            let answer ="yes";
             let n = str.length;
             let ow = str.toUpperCase();
             let num = 0;
-            for(let i=0; i<n/2; i++) {
+            for(let i=0; i<Math.floor(n/2); i++) {
                 num = ow.indexOf(ow[i])+ow.lastIndexOf(ow[i]);
                 if(num != n-1) {
                     answer = "no";
                     break;
-                } else {
-                    answer = "yes";
-                }
+                } 
             };
             return answer;
+
+
+            /*
+                다른 방법 1
+                문자를 비교이기 때문에 직접 문자를 비교한다. 
+            */
+            // let answer2 = "yes";
+            // str = str.toUpperCase();
+            // let len = str.length;
+            // for(let i=0; i<Math.floor(len/2); i++) {
+            //     if(s[i]!==s[len-i-1]) return "no";
+            // }
+            // return answer2;
+
+            /*
+                다른 방법2
+                입력 받은 문자를 reverse() 메서드를 활용해 뒤집은 후 비교하기
+            */
+            // let answer3 = "yes";
+            // str = str.toUpperCase();
+            // if(str.split('').reverse().join('')!==str) return "NO"
+            // return answer3;
         }
-        let str = "geoiooG"
+        let str = "goioG"
         console.log(solution(str));
     </script>
 </body>

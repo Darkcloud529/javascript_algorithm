@@ -18,25 +18,20 @@
             1. 입력받은 첫번째 문자를 key로 설정하고 먼저 출력한다. 
             2. 그리고 각 문자열을 순차적으로 조회하며 key값과 비교한다. 
             3. 비교한 key값과 동일한 경우 count를 증가시킨다. 
-            4. key값과 다른경우 먼저 현재까지 count값을 입력한다. 이때 만약 count값이 0인 경우(반복x) 생략한다. 
+            4. key값과 다른경우 먼저 현재까지 count값을 입력한다. 이때 만약 count값이 1인 경우(반복x) 생략한다. 
             5. key값을 새로운 문자로 조정하고 count값을 초기화한다. 
         */
         function solution (word) {
             let answer = "";
-            answer += word[0];
-
-            let count = 0;
-            let key = word[0];
+            let count = 1;
             let n = word.length;
             for(let i=0; i<n; i++) {
-                if(word[i] == key) {
+                if(word[i] == word[i+1]) {
                     count++;
                 } else {
-                    if(count != 0) answer += count;
-                    key = word[i];
-                    //console.log(key);
-                    answer += key;
-                    count = 0;
+                    answer += word[i];
+                    if(count > 1) answer += String(count);
+                    count = 1;
                     
                 }
             }
