@@ -8,6 +8,19 @@
 </head>
 <body>
     <script>
+        /*
+            뒤집은 소수
+            1. 자연수 정보가 담긴 배열을 입력받는다. 
+            2. 자연수를 뒤집은 후 소수인지 판별
+            3. 소수인 숫자만 모아 출력
+
+            해결
+            1. 먼저 배열을 입력 받아 자연수를 뒤집습니다. 
+            2. 그리고 소수 판별을 진행
+            - 1인 경우 : 소수 x
+            - 2인 경우 : 소수 o
+            - 3이상부터 : 숫자를 1씩 증가시키며 나눈 나머지가 0이 하나라도 있다면 소수 x
+        */
         function solution (arr) {
             let answer = [];
             let n = arr.length;
@@ -17,7 +30,6 @@
                 let number = arr[i];
                 let revNum = "";
                 while(number != 0) {
-                    //console.log(number);
                     revNum += number%10;
                     number = Math.floor(number/10);
                 }
@@ -25,14 +37,20 @@
             }
 
             for(let i=0; i < revArr.length; i++) {
-                if(revArr[i] == 2) answer.push(revArr[i]);
-                for(let j=2; j <=revArr[i]; j++) {
-                    if(revArr[i]%j == 0 ) {
-                        break;
-                    }
-                }
+                let flag;
+                flag=decimal(revArr[i]);
+                if(flag) answer.push(revArr[i]);   
             }
 
+            function decimal(num) {
+                if(num <= 1) return false;
+                if(num == 2) return true;
+                for(let i=3; i < num; i++) {
+                    if(num%i == 0 ) return false;
+                }
+                return true;
+            }
+            
             return answer;
         }
         let arr=[32, 55, 62, 20, 250, 370, 200, 30, 100];
