@@ -17,22 +17,22 @@
                 let menti = 0;
                 for(let j=0; j<column; j++) {
                     let count = 0;
-                    //console.log(arr[j][i]);
+                    console.log(count);
                     for(let k=0; k<row; k++) {
                         menti = k+1;
                         //console.log(arr[j][k]);
                         if(arr[j][i] < arr[j][k]) {
                             count++;
-                        } else {
-                            break;
+                        } else if(arr[j][i] > arr[j][k]) {
+                            count--;
                         }
                     }
                     console.log(count);
                     console.log("next");
-                    if(count == 2) {
+                    if(count == 2 || count == -2) {
                         answer.push([mento,menti]);
-                        count = 0;
                     }
+                    count = 0;
                 }
             }
 

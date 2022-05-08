@@ -21,6 +21,14 @@
             - 2인 경우 : 소수 o
             - 3이상부터 : 숫자를 1씩 증가시키며 나눈 나머지가 0이 하나라도 있다면 소수 x
         */
+        function decimal(num) {
+            if(num <= 1) return false;
+            for(let i=2; i < num; i++) {
+                if(num%i == 0 ) return false;
+            }
+            return true;
+        }
+
         function solution (arr) {
             let answer = [];
             let n = arr.length;
@@ -29,28 +37,19 @@
             for(let i=0; i<n; i++) {
                 let number = arr[i];
                 let revNum = "";
-                while(number != 0) {
+                while(number !=0) {
                     revNum += number%10;
                     number = Math.floor(number/10);
                 }
-                revArr.push(parseInt(revNum));
+                if(decimal(revNum)) answer.push(parseInt(revNum));
             }
 
-            for(let i=0; i < revArr.length; i++) {
-                let flag;
-                flag=decimal(revArr[i]);
-                if(flag) answer.push(revArr[i]);   
-            }
+            // for(let i=0; i < revArr.length; i++) {
+            //     let flag;
+            //     flag=decimal(revArr[i]);
+            //     if(flag) answer.push(revArr[i]);   
+            // }
 
-            function decimal(num) {
-                if(num <= 1) return false;
-                if(num == 2) return true;
-                for(let i=3; i < num; i++) {
-                    if(num%i == 0 ) return false;
-                }
-                return true;
-            }
-            
             return answer;
         }
         let arr=[32, 55, 62, 20, 250, 370, 200, 30, 100];
