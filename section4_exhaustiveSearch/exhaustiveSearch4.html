@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(num, arr) {
+            let answer = 0;
+            let sum = 0;
+            let n = arr.length;
+            console.log(arr);
+
+            for(let i=n; i>=5; i--) { // 졸업 선물을 줄 수 있는 학생 수
+                let stuNum = i-1;
+                
+                //console.log(stuNum);
+                for(let j=0; j<stuNum; j++) { // 50% 할인을 적용할 학생 상품 번호
+                    for(let k=0; k<stuNum; k++) { // 학생 번호 선정
+                        console.log(result.length);
+                        if(j==k) {
+                            sum += arr[k].reduce((a,b) => a/2+b, 0);
+                        }
+                        if(j!=k) {
+                            sum += arr[k].reduce((a,b) => a+b, 0);
+                        }
+                    }
+                }
+                console.log(sum);
+            }
+            return answer;
+        }
+        let arr=[[6, 6], [2, 2], [4, 3], [4, 5], [10, 3]];
+        console.log(solution(28, arr));
+    </script>
+</body>
+</html>
