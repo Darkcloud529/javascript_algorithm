@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            두 배열 합치기
+            1. 정수 정보가 담긴 두 배열을 입력 받습니다. 
+            2. 두 배열을 합친 후 오름 차순으로 정리해 출력합니다. 
+            
+            해결
+            1. 두 배열을 입력 받은 후 concat() 메서드를 이용해 합친다. 
+            2. sort() 메서드를 이용해 오름 차순으로 정리한다. 
+        */
+        function solution(a,b) {
+            let answer = [];
+            answer = a.concat(b).sort();
+
+            return answer;
+        }
+        let a=[1, 3, 5];
+        let b=[2, 3, 6, 7, 9];
+        console.log(solution(a, b));
+    </script>  
+</body>
+</html>
