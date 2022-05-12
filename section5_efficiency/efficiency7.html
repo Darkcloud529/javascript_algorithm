@@ -16,34 +16,30 @@
             해결
             1. 첫번째로 입력받은 단어를 분석해 각각 대문자, 소문자의 기호와 개수를 파악합니다. 
             2. 두번째로 입력받은 단어를 순차적으로 분석하며 비교합니다. 
-            이때 없다면 바로 return 해 no로 출력
+            이때 없거나 value가 이미 0인 경우 바로 return 해 no로 출력
             3. 있다면 계속해서 비교 분석하며 yes로 저장
             4. 분석이 끝난 후 answer를 출력
 
         */
         function solution(wordA, wordB) {
-            let answer = "";
+            let answer = "YES";
             let resultA = new Map();
             for(let x of wordA) {
                 if(resultA.has(x)){ 
                     resultA.set(x, resultA.get(x)+1);
                 }
                 else {
-                    resultA.set(x,1)
+                    resultA.set(x,1);
                 }
             }
             for(let x of wordB) {
-                if(resultA.has(x)){ 
-                    resultA.set(x, resultA.get(x)-1);
-                    answer = "YES";
-                }
-                else {
-                    return answer = "NO"; 
-                }
+                if(!sH.has(x) || sH.get(x)==0) return "NO";
+                sH.set(x, sH.get(x)-1);
             }
             //console.log(resultA);
             return answer;
         }
+
         let a="AbaAeCe";
         let b="baeeACA";
         console.log(solution(a, b));

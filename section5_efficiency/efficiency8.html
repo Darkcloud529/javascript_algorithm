@@ -60,6 +60,51 @@
             return answer;
 
         }
+
+        // 풀이
+        /*
+            1. t문자열과 s문자열 각각의 map()을 만듭니다. 
+            2. t문자열은 전부 map을 만들고 s문자열의 map은 t문자열의 길이-1 크기 만큼 만듭니다. 
+            3. s문자열의 3번째 인덱스부터 map에 넣으면서 비교를 시작합니다.
+            4. 두 map의 비교는 compareMaps() 함수를 만들어 비교합니다. 
+            compareMaps()
+            - 두 맵의 사이즈가 같은지 비교 다르면 반환
+            - map1의 키가 map2에 없거나 map1 키에 해당하는 map2의 value가 다른경우 반환합니다. 
+            - 비교가 끝나면 참 반환
+            5. 그리고 lt 값을 이용해 s문자열의 첫번재 인덱스와 value를 s문자열 map에서 삭제합니다. 
+            6. lt를 1씩 증가합니다. 
+        */
+        function compareMaps(map1, map2){
+                if(map1.size!==map2.size) return false;
+                for(let [key, val] of map1){
+                    if(!map2.has(key) || map2.get(key)!==val) return false;
+                }
+                return true;
+            }
+        function solution2(s, t){
+            let answer=0;
+            let tH = new Map();
+            let sH = new Map();
+            for(let x of t){    // t문자열 map생성
+                if(tH.has(x)) tH.set(x, tH.get(x)+1);
+                else tH.set(x, 1);
+            }
+            let len=t.length-1;
+            for(let i=0; i<len; i++){   //s문자열 map생성
+                if(sH.has(s[i])) sH.set(s[i], sH.get(s[i])+1);
+                else sH.set(s[i], 1);
+            }
+            let lt=0;
+            for(let rt=len; rt<s.length; rt++){
+                if(sH.has(s[rt])) sH.set(s[rt], sH.get(s[rt])+1);
+                else sH.set(s[rt], 1);
+                if(compareMaps(sH, tH)) answer++;
+                sH.set(s[lt], sH.get(s[lt])-1);
+                if(sH.get(s[lt])===0) sH.delete(s[lt]);
+                lt++;
+            }
+            return answer;
+        }
         let a="bacaAacbaBCabcbacbacasb";
         let b="abc";
         console.log(solution(a, b));
