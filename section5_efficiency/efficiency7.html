@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            아나그랩 : Anagram이란 두 문자열이 알파벳의 나열 순서를 다르지만 그 구성이 일치하면 두 단어는 아 나그램이라고 합니다.
+            1. 길이가 같은 두 개의 단어가 입력되면 두 단어가 일치하는지 비교합니다. 
+            2. 같다면 YES, 다르면 NO를 출력합니다. 
+
+            해결
+            1. 첫번째로 입력받은 단어를 분석해 각각 대문자, 소문자의 기호와 개수를 파악합니다. 
+            2. 두번째로 입력받은 단어를 순차적으로 분석하며 비교합니다. 
+            이때 없다면 바로 return 해 no로 출력
+            3. 있다면 계속해서 비교 분석하며 yes로 저장
+            4. 분석이 끝난 후 answer를 출력
+
+        */
+        function solution(wordA, wordB) {
+            let answer = "";
+            let resultA = new Map();
+            for(let x of wordA) {
+                if(resultA.has(x)){ 
+                    resultA.set(x, resultA.get(x)+1);
+                }
+                else {
+                    resultA.set(x,1)
+                }
+            }
+            for(let x of wordB) {
+                if(resultA.has(x)){ 
+                    resultA.set(x, resultA.get(x)-1);
+                    answer = "YES";
+                }
+                else {
+                    return answer = "NO"; 
+                }
+            }
+            //console.log(resultA);
+            return answer;
+        }
+        let a="AbaAeCe";
+        let b="baeeACA";
+        console.log(solution(a, b));
+    </script>
+</body>
+</html>

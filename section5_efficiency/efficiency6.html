@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            학생회장 선출
+            1. 학생회장 후보의 기호가 연속적으로 적힌 문자열을 입력받습니다. 
+            2. 가장 많이 뽑힌 기호를 찾아 출력하세요.
+
+            해결
+            1. Map() 사용해 기호와 뽑힌 횟수를 정리한다. 
+            2. 입력받은 문자열을 탐색하며 result에 해당하는 기호가 있는지 확인
+            있다면? 기존 값에 +1 상승
+            없다면? 새롭게 입력
+            3. 문자열 탐색이 종료된 result를 다시 탐색하며 가장 큰 값을 찾고
+            가장 큰 값을 가진 value의 key값= 기호를 answer에 저장해 출력한다. 
+        */
+        function solution(str) {
+            let answer;
+            let result = new Map();
+            for(let x of str) {
+                if(result.has(x)){ result.set(x, result.get(x)+1)}
+                else {result.set(x,1)}
+            }
+            let max = Number.MIN_SAFE_INTEGER;
+            for(let [key, value] of result) {
+                if(value > max) {
+                    max = value;
+                    answer = key;
+                }
+            }
+            return answer;
+        }
+        let str="BACBACCACCBDEDE";
+        console.log(solution(str));
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            최대 매출
+            1. 일수와 매출액 정보가 담긴 배열을 입력받습니다. 
+            2. 입력받은 연속된 일수동안 가장 매출액이 높은 매출액을 출력합니다,
+
+            해결
+            1. 입력받은 날짜가 3일이라면 첫날부터 셋째날까지의 매출액의 합을 초기값으로 설정한다. 
+            2. 인덱스를 증가시키고 첫째날 매출액을 감소시키면서 비교합니다. 
+            3. 이때 Math.max() 이용해 비교 후 최종 결과를 출력합니다. 
+        */
+        function solution(num, arr) {
+            let answer;
+            let n = arr.length;
+            let sum = 0;
+            for(let i=0; i<num; i++) {
+                sum += arr[i];
+            }
+            answer=sum;
+            for(let i=num; i<n; i++) {
+                sum += (arr[i]-arr[i-num]);
+                answer=Math.max(answer, sum);
+            }
+            return answer;
+        }
+        let a=[12, 15, 11, 20, 25, 10, 20, 19, 13, 15];
+        console.log(solution(3, a));
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            모든 아나그램 찾기
+            1. S문자열과 T문자열을 입력받는다. 
+            2. T문자열과 아나그램이 되는 S문자열의 연속부분수열의 개수를 찾아 출력한다. 
+
+            해결
+            1. S문자열의 길이(m), T문자열의 길이(n)를 먼저 구합니다. 
+            2. S문자열의 왼쪽포인터(lt)를 기준으로 값을 증가시키며 S문자열을 탐색합니다. 
+            3. 문자열을 탐색할 때 rt값은 1, count값은 0, wordT의 해시맵을 초기값으로 설정한다. 
+            4. 연속부분수열(partWord)을 lt기준으로 먼저 입력후 n 값만큼 rt를 이용해 partword를 완성합니다. 
+            5. partWord를 아나그램인지 비교해보며 count값을 충족하면 answer 값을 증가시킵니다.
+            (이때 만약 result의 value가 0이 아닌 경우 count값을 초기화합니다. ) 
+            6. 탐색이 끝난 후 최종 answer값을 출력합니다. 
+        */
+        function solution(wordS, wordT) {
+            let answer = 0; 
+            let result = new Map();
+
+            const n=wordT.length;
+            const m=wordS.length;
+            let partWord="";
+            
+            for(let lt=0; lt<=m-n; lt++) {
+                for(let x of wordT) result.set(x, 1);
+                let rt = 1;
+                let count = 0;
+                partWord = wordS[lt];
+                while(rt < n) {
+                    partWord += wordS[rt+lt];
+                    rt++;
+                }
+
+                console.log(partWord);
+
+                for(let x of partWord) {
+                    if(result.has(x)) {
+                        result.set(x, result.get(x)-1);
+                        count++;
+                    }
+                    else break;
+                }
+
+                for(let value of result.values()) {
+                    if(value < 0) count = 0;
+                }
+                //console.log(count);
+                if(count == 3) answer++;
+            }
+            
+            return answer;
+
+        }
+        let a="bacaAacbaBCabcbacbacasb";
+        let b="abc";
+        console.log(solution(a, b));
+    </script>
+</body>
+</html>
