@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(str) {
+            let answer = [];
+            let stack = [];
+            let count = 0;
+            for(let x of str) {
+                answer.push(x);
+            }
+            let n = answer.length;
+            console.log(n);
+            for(let i=n-1; i>=0; i--) {
+                console.log(count);
+                if(answer[i] == ")") {
+                    answer.pop(answer[i]);
+                    count++;
+                } else if(answer[i] == "(" && count != 0) {
+                    answer.pop(answer[i]);
+                    count--;
+                } else if(count != 0) {
+                    answer.pop(answer[i]);
+                } else {
+                    stack.push(answer[i]);
+                    answer.pop(answer[i]);
+                }
+                //console.log(answer);
+            }
+            stack = stack.reverse().join('')
+            return stack;
+        }
+        let str="(A(BC)D)EF(G(H)(IJ)K)LM(N)";
+        console.log(solution(str));
+    </script>
+</body>
+</html>
