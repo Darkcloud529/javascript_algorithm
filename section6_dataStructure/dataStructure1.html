@@ -8,6 +8,19 @@
 </head>
 <body>
     <script>
+        /*
+            올바른 괄호
+            1. 연속된 괄호가 적힌 문자열을 입력받습니다. 
+            2. 입력받은 문자열이 올바른 괄호 인지, 흔히 () 짝이 맞는지 확인합니다. 
+            3. 옳다면 yes 틀리면 no 를 출력합니다. 
+
+            해결
+            1. 입력받은 문자열을 탐색하면서
+            "(" 일때 1 입력
+            ")" 일때 -1 입력
+            2. 배열의 합을 계산하여 0인 경우 YES 
+            0이 아니라면 NO
+        */
         function solution(str) {
             let answer="NO";
             let stack = [];
@@ -24,6 +37,33 @@
             if(sum == 0) return answer = "YES"
             return answer;
         }
+
+        // 스택 자료구조를 활용한 알고리즘 풀이
+        /*
+            스택은 FILO(First In Last Out) 구조
+
+            풀이
+            1. stack 배열을 생성하고 answer는 yes로 초기화 합니다. 
+            2. 입력받은 문자열을 탐색하면 '(' 인 경우 stack에 push(), 입력합니다. 
+            3. 만약 처음부터 ')'인 경우엔 stack배열의 길이가 0이 되므로 NO를 return 합니다. 
+            4. 탐색 중 ')'인 경우 stack에 담긴 배열을 pop() 하여 삭제합니다. 
+            5. 탐색이 끝난 후 stack의 배열 길이가 0이라면, 괄호의 짝이 다 올바르다고 판단할 수 있습니다. 
+            만약 0이 아닌 경우 no를 return 합니다. 
+        */
+        function solution2(s){
+                let answer="YES";
+                stack=[];
+                for(let x of s){
+                    if(x==='(') stack.push(x);
+                    else{
+                        if(stack.length===0) return "NO";
+                        stack.pop();
+                    }
+                }
+                if(stack.length>0) return "NO";  
+                return answer;
+            }
+
         let a="(()(()))(()";
         console.log(solution(a));
     </script>

@@ -8,6 +8,18 @@
 </head>
 <body>
     <script>
+        /*
+            괄호 문자 제거
+            1. 문자열을 입력받아 소괄호 안에 있는 문자를 제거한 문자만 출력합니다. 
+
+            해결
+            1. 문자열을 우선 stack이라는 배열에 담습니다. 
+            2. 끝에서부터 탐색합니다
+            ")" 인 경우 , count값을 상승시킵니다. 
+            "(" 인 경우 , count값을 감소시킵니다. 
+            3. 위를 반복하며 count값이 0일 때의 문자열의 문자를 answer배열에 넣습니다. 
+            4. answer배열의 뒤집고 합쳐 문자열로 출력합니다. 
+        */
         function solution(str) {
             let answer = [];
             let stack = [];
@@ -20,22 +32,40 @@
             for(let i=n-1; i>=0; i--) {
                 console.log(count);
                 if(answer[i] == ")") {
-                    answer.pop(answer[i]);
                     count++;
                 } else if(answer[i] == "(" && count != 0) {
-                    answer.pop(answer[i]);
                     count--;
                 } else if(count != 0) {
-                    answer.pop(answer[i]);
+                    continue;
                 } else {
                     stack.push(answer[i]);
-                    answer.pop(answer[i]);
                 }
                 //console.log(answer);
             }
             stack = stack.reverse().join('')
             return stack;
         }
+        // 스택 자료구조 알고리즘
+        /*
+            1. stack 배열에 문자열을 하나씩 입력한다. 
+            2. 이때 "(" 또는 다른 문자를 우선적으로 입력한다. 
+            3. 그리고 ")" 가 입력되면 "("를 만날때까지 pop()하여 삭제합니다. 
+            4. 위 작업을 반복하면 괄호 안에 있는 문자를 자동적으로 제거가 되고 남은 문자열만 stack 배열에
+            입력됩니다. 
+            5. 그 후 stack배열을 연결시켜(join) 문자열로 출력합니다. 
+        */
+        function solution2(s){  
+                let answer;
+                let stack=[];
+                for(let x of s){
+                    if(x===')'){
+                        while(stack.pop()!=='(');
+                    }
+                    else stack.push(x);
+                }
+                answer=stack.join('');
+                return answer;
+            }
         let str="(A(BC)D)EF(G(H)(IJ)K)LM(N)";
         console.log(solution(str));
     </script>
