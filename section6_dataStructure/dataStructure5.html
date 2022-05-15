@@ -12,20 +12,30 @@
             let answer=0;
             let stack = [];
             let count = 0;
-            let n = stack.length;
+            let lt = "";
             //console.log(str.length)
             for(let x of str) {
                 if(x==='(') {
                     stack.push(x);
                 } else {
-                    while(stack.pop()!=='(');
-                    if(n === 0) { count = 0;}
-                    else count++;
+                    if(lt === '(') {
+                        stack.pop();
+                        if(stack.length!==0) count++;
+                        console.log("레이저 개수 : " + count);
+                    } else {
+                        stack.pop();
+                        console.log("계산 전 : " +count);
+                        answer += count+1;
+                    }
                 }
+                lt = x;
+                if(stack.length===0) count=0;
+                console.log("lt값 " + lt);
+                console.log(stack);
             }
-            return stack;
+            return answer;
         }
-        let a="()(())";
+        let a="()(((()())(())()))";
         console.log(solution(a));
     </script>
 </body>
