@@ -8,6 +8,17 @@
 </head>
 <body>
     <script>
+        /*
+            후위식 연산
+            1. 후위식 연산으로 된 문자열을 입력받습니다. 
+            2. 입력 받은 문자열을 계산한 결과값을 출력합니다. 
+
+            해결
+            1. 입력받은 문자열을 순차적으로 탐색합니다. 이때 숫자인지 기호인지 확인을합니다. 
+            2. 기호를 만난 경우 사칙연산 기호에 따라 계산할 수 있도록 경우를 나누며
+            stack 배열에 입력된 숫자 2개를 꺼내어 계산한 후 다시 stack배열에 넣습니다. 
+            3. 2번 과정을 반복한 후 최종적으로 계산이 끝난 배열을 반환합니다. 
+        */
         function solution(str) {
             let answer = 0;
             let stack = [];
@@ -42,9 +53,11 @@
                 }
                 console.log(stack);
             }
-            return stack;
+            answer = stack[0];
+            return answer;
         }
-
+        // 풀이
+        // if~elseif 사용
         function solution2(s){  
                 let answer;
                 let stack=[];

@@ -43,6 +43,26 @@
             result = answer[0];
             return result;
         }
+        //풀이
+        // 자료구조 큐 사용!!
+        /*
+            1. Array.from() 이용해 큐 배열 만들기
+            2. 큐의 길이가 0이 될때까지 반복
+            3. 입력받은 for문을 이용해 key-1번째 만큼 값을 옮긴다. 
+            4. 그후 해당하는 인덱스를 제거
+            5. 4번과정을 마친후 큐의 길이가 1인지 확인
+            1이라면 왕자가 1명남았기 때문에 그때의 값을 answer저장
+        */
+        function solution2(n, k){
+                let answer;
+                let queue=Array.from({length:n}, (v, i)=>i+1); 
+                while(queue.length){
+                    for(let i=1; i<k; i++) queue.push(queue.shift());
+                    queue.shift();
+                    if(queue.length===1) answer=queue.shift();
+                }  
+                return answer;
+            }
         console.log(solution(5, 3));
     </script>
 </body>

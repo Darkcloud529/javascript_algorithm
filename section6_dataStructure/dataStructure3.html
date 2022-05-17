@@ -59,20 +59,21 @@
             }
             return answer;
         }
-
+        // 풀이
+        // forEach문 사용!!
         function solution2(board, moves){
                 let answer=0;
                 let stack=[];
                 moves.forEach(pos => {
                     for(let i=0; i<board.length; i++){
-                        if(board[i][pos-1]!==0){
+                        if(board[i][pos-1]!==0){  // 인형을 만난을 때
                             let tmp=board[i][pos-1];
-                            board[i][pos-1]=0;
-                            if(tmp===stack[stack.length-1]){
+                            board[i][pos-1]=0; // 빈공간 만들어주기
+                            if(tmp===stack[stack.length-1]){ // 같은 인형인 경우
                                 stack.pop();
                                 answer+=2;
                             }
-                            else stack.push(tmp);
+                            else stack.push(tmp); // 다른 인형인 경우
                             break;
                         }
                     }

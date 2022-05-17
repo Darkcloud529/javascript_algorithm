@@ -8,34 +8,38 @@
 </head>
 <body>
     <script>
-        function solution(str) {
-            let answer=0;
-            let stack = [];
-            let count = 0;
-            let lt = "";
-            //console.log(str.length)
-            for(let x of str) {
-                if(x==='(') {
-                    stack.push(x);
-                } else {
-                    if(lt === '(') {
-                        stack.pop();
-                        if(stack.length!==0) count++;
-                        console.log("레이저 개수 : " + count);
-                    } else {
-                        stack.pop();
-                        console.log("계산 전 : " +count);
-                        answer += count+1;
+        // 해결 못한 문제!!!!
+
+        /*
+            쇠막대기 문제
+            1. 한줄에 쇠막대기와 레이저의 배치를 표현하는 문자열을 입력받습니다. 
+            인접한 괄호 () 쌍은 레이저, 쇠막대기는 ( , ) 로 표현합니다. 
+            2. 레이저로 짤린 쇠막대기의 개수를 출력하세요
+
+            풀이
+            1. 입력받은 배열을 순차적으로 탐색합니다
+            2. '('를 입력받으면 stack 배열에 push() 합니다
+            3. ')'를 입력받으면 경우에 따라 계산을 합니다.
+            우선 기존에 담긴 정보를 pop합니다. 왜? 인접한 쌍인지 쇠막대가 들어온건지 확인하기 위해
+            4. 문자열의 전 인덱스가 "("인지 확인합니다. 
+            맞다면 레이저이므로 현재까지 길이 값, 막대기의 값을 더합니다. 
+            틀리다면 막대기의 끝이므로 1을 더합니다. 
+        */
+        function solution(s){
+                let answer=0;
+                let stack=[];
+                for(let i=0; i<s.length; i++){
+                    if(s[i]==='(') stack.push('(');
+                    else{
+                        stack.pop(); 
+                        if(s[i-1]==='(') answer+=stack.length; // 레이저의 끝
+                        else answer++; //막대기의 끝
+                        //stack.pop(); 이 위치에 하면 레이저까지 카운팅한다.
                     }
-                }
-                lt = x;
-                if(stack.length===0) count=0;
-                console.log("lt값 " + lt);
-                console.log(stack);
+                }                          
+                return answer;
             }
-            return answer;
-        }
-        let a="()(((()())(())()))";
+        let a="()(((()())(())()))(())";
         console.log(solution(a));
     </script>
 </body>

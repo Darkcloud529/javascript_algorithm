@@ -28,6 +28,28 @@
             }
             return answer;
         }
+
+        // 풀이
+        /*
+            1. 필수과목을 split을 통해 큐 배열에 넣습니다. 
+            2. 계획표를 순차적으로 탐색을 합니다.
+            3. 해당하는 과목이 필수 큐 배열에 존재하는지 확인!
+            4. 만약 존재한다면 그 과목이 큐 배열 제일 첫번째에 있는 과목가 일치하는지 비교
+            틀리면 no를 return
+            5. 탐색이 끝난 후 필수 과목 큐배열의 크기가 0보다 큰 경우,
+            즉 모든 필수과목을 계획하지 않은 경우에도 return NO한다.
+        */
+        function solution2(need, plan){
+                let answer="YES";
+                let queue=need.split('');
+                for(let x of plan){
+                    if(queue.includes(x)){
+                        if(x!==queue.shift()) return "NO";
+                    }
+                }
+                if(queue.length>0) return "NO";  
+                return answer;
+            }
         let a="CBA";
         let b="CBDGEA";
         console.log(solution(a, b));
