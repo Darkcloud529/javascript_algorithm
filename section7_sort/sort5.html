@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            Least Recently Used(카카오 캐시 문제 변형)
+            1. 캐시의 사이즈와 작업 배열을 입력받습니다. 
+            2. 가장 최근에 입력받은 작업을 캐시 맨 앞에 위치시킵니다. 
+            3. 만약 같은 작업이 있다면 캐시 내에서 맨 앞으로 위치를 변경합니다. 
+            4. 또한 캐시 사이즈 이상의 작업이 입력된 경우 가장 나중에 작업한 작업을 삭제합니다. 
+            5. 입력 받은 정보의 결과물을 출력하세요. 
+
+            해결
+            1. 캐시 메모리 빈 배열을 만듭니다. 
+            2. 작업 배열을 순차적으로 읽으면서 캐시 메모리에 넣는다. 
+            캐시 메모리에 나눌 때 경우를 나눈다. 
+            1) 작업이 이미 캐시 메모리에 있는 경우 - 먼저 작업의 해당하는 인덱스를 찾고 그 인덱스를 맨앞으로 보내고 나머지는 한칸씩 움직인다.
+            2) 캐시 메모리 크기보다 클 때 작업이 들어오는 경우 - 맨 마지막 작업을 pop() 하고 넣는다.
+            3. 결과를 출력한다. 
+
+        */
+        function solution(size, work) {
+            let answer = [];
+            for(let x of work) {
+                if(answer.includes(x)) {
+                    let index = answer.indexOf(x);
+                    let tmp=0;
+                    for(let j=index; j>0; j--) {
+                        tmp = answer[j-1];
+                        answer[j-1] = answer[j]
+                        answer[j] = tmp;
+                    }
+                    //console.log("값이 있는 경우 : " + answer);
+                }
+                else if(answer.length == size) {
+                    answer.pop();
+                    answer.unshift(x);
+                } else {
+                    answer.unshift(x);
+                }
+                //console.log(answer);
+            }
+            return answer;
+        }
+        let arr=[1, 2, 3, 2, 6, 2, 3, 5, 7];
+        console.log(solution(5, arr));
+    </script>
+</body>
+</html>

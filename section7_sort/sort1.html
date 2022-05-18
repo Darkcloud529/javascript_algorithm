@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            선택 정렬
+            숫자 배열을 입력하면 오름차순으로 정렬하는 프로그램
+
+            해결
+            1. 제일 첫번째 인덱스가 가장 작은 숫자로 생각합니다.
+            2. 그 후 인덱스와 비교하며 가장 작은 값을 찾습니다. 
+            3. 찾으면 그때의 값을 min 최소값으로 설정하고 인덱스를 num에 저장합니다. 
+            4. 만약 처음 설정한 최소값과 3번과정이 끝난 후 최소값이 값다면 continue
+            5. 다르면 위치를 변경한다. 
+        */
+        function solution(arr) {
+            let answer=arr;
+            let min=tmp=num=0;
+            for(let i=0; i<arr.length-1; i++) {
+                min = answer[i];
+                console.log(min);
+                for(let j=i+1; j<arr.length; j++ ) {
+                    if(min > answer[j]) {
+                        min = answer[j];
+                        num = j;
+                    }
+                }
+                if(min === answer[i]) continue;
+                tmp = answer[i];
+                answer[i] = answer[num];
+                answer[num] = tmp;
+                //console.log(answer);
+            }
+            return answer;
+        }
+        let arr = [13, 5, 11, 7, 23, 15];
+        console.log(solution(arr));
+    </script>
+</body>
+</html>

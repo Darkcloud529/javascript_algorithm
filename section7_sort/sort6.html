@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            장난 꾸러기 현수
+            1. 키가 작은 학생부터 큰 학생 순으로 키 정보가 담긴 배열을 입력받습니다. 
+            2. 키가 작은 학생부터 번호를 매깁니다. 
+            3. 그런데 키가 큰 현수가 키가 작은 짝꿍과 자리를 바꿨을 때 현수와 짝궁이 받게되는 번호를 각각 출력하세요. 
+
+            해결
+            1. 키 정보가 담긴 배열을 순차적으로 탐색하면서 뒷 사람보다 키가 크거나 같은 사람을 먼저 찾습니다. 
+            해당 학생의 인덱스+1이 현수의 번호입니다. 
+            2. 그리고 현수의 인덱스를 활용해 현수 이후의 학생들을 탐색합니다. 
+            앞 사람보다 키가 작은 사람을 짝고 해당 학생의 인덱스+2가 짝궁의 번호이다
+            3. 현수와 짝궁의 번호를 answer배열에 입력하고 반환한다. 
+        */
+        function solution(student) {
+            let answer=[];
+            let n = student.length;
+            let hy=fr=0;
+            for(let i=0; i<n-1; i++) {
+                if(student[i] >= student[i+1]) {
+                    hy = i+1;
+                    break;
+                }  
+            }
+            //console.log(hy);
+            for(let j=hy; j<n; j++) {
+                if(student[j+1] < student[j]) {
+                    fr = j+2;
+                    break;
+                }
+            }
+            
+            answer.push(hy);
+            answer.push(fr);
+            return answer;
+
+        }
+        let arr=[120, 130, 150, 150, 130, 150];
+        console.log(solution(arr));
+    </script>
+</body>
+</html>

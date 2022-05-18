@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            회의실 배정
+            1. 회의 시작 시간과 마치는 시간이 적혀진 배열을 입력받습니다. 
+            2. 회의를 할 수 있는 최대 갯수를 찾아 출력하세요.
+
+            해결
+            1. 우선 입력받은 배열을 오름차순으로 정리합니다. 
+            2. 배열을 첫번째부터 탐색을 합니다. 
+            3. 첫번재 배열의 값을 count값에 넣고 마치는 시간을 가지고 옵니다. 
+            4. 마치는 시간과 일치하는 시작 시간을 찾아 count배열에 넣고 다시 마치는 시간과 일치하는 값을 넣습니다. 
+            5. 4번 과정을 마친 count배열의 길이 값과 max값중 더 큰 값을 max에 저장합니다. 
+            6. 모든 탐색이 끝난 후의 max값을 반환합니다. 
+        */
+        function solution(meeting) {
+            let answer = meeting;
+            let max = Number.MIN_SAFE_INTEGER;
+            answer = answer.sort((a,b) => a[0]-b[0]);
+            let n = answer.length;
+            for(let i=0; i<n-1; i++) {
+                let count = [];
+                count.push(answer[i]);
+                let next = answer[i][1];
+                for(let j=i+1; j<n; j++ ) {
+                    if(next == answer[j][0]) {
+                        next = answer[j][1];
+                        count.push(answer[j]);
+                    }
+                }
+                max = Math.max(max, count.length);
+            }
+            return max;
+        }
+        let arr=[[1, 4], [2, 3], [3, 5], [4, 6], [5, 7]];
+        console.log(solution(arr));
+    </script>
+</body>
+</html>
