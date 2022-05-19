@@ -44,6 +44,23 @@
             return answer;
 
         }
+
+        //풀이 
+        /*
+            위 문제는 정렬을 하면 쉽게 풀립니다. 
+            원래 배열과 정렬한 배열을 비교하면 현수와 짝꿍의 위치를 쉽게 찾을 수 있습니다. 
+        */
+        function solution2(arr){
+                let answer=[];
+                let sortArr=arr.slice();
+                sortArr.sort((a, b)=>a-b);
+                // 그냥 sort()만 적는 경우?
+                // 문자열만 정렬이 됩니다. 
+                for(let i=0; i<arr.length; i++){
+                    if(arr[i]!==sortArr[i]) answer.push(i+1);
+                }
+                return answer;
+            }
         let arr=[120, 130, 150, 150, 130, 150];
         console.log(solution(arr));
     </script>

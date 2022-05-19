@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            이분검색
+            1. 숫자로 이루어진 배열을 입력받은 후 오름차순으로 정리한 후 이분검색을 통해 해당하는 숫자가 몇번째인지 반환합니다.
+            
+            해결
+            1. 시작과 끝 위치를 설정합니다. 
+            2. 시작값이 끝값과 같거나 작을때까지 반복합니다. 
+            3. 시작과 끝값을 기준으로 중간값을 설정합니다. 
+            4. 중간값 인덱스에 해당하는 숫자가 key와 같다면 mid+1 하여 반환합니다. 
+            5. 다르다면 경우에 따라 나뉩니다. 
+            1) 값이 key보다 크다면 끝 값의 위치를 변경 ,mid-1
+            2_ 값이 key보다 작다면 처음 값의 위치를 변경, mid+1
+        */
+        function solution(target, arr){
+                let answer;
+                arr.sort((a, b)=>a-b);
+                let lt=0, rt=arr.length-1;
+                while(lt<=rt){
+                    let mid=parseInt((lt+rt)/2);
+                    if(arr[mid]===target){
+                        answer=mid+1;
+                        break;
+                    }
+                    else if(arr[mid]>target) rt=mid-1;
+                    else lt=mid+1;
+                }
+               
+                return answer;
+            }
+        let arr=[23, 87, 65, 12, 57, 32, 99, 81];
+        console.log(solution(32, arr));
+        </script>
+    </script>
+</body>
+</html>
