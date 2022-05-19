@@ -8,9 +8,83 @@
 </head>
 <body>
     <script>
-        function solution(num, music) {
+        /*
+            뮤직 비디오 (결정 알고리즘)
+            1. 노래를 연속으로 녹음해야하지만 dvd 장수는 줄이려고 합니다. 
+            2. 최소 장수 및 노래의 길이를 입력받고 dvd당 최소의 음악 길이를 구하시오.
+
+            힌트
+            1. 가장 긴 노래의 음악을 최소값(처음)으로 설정하고 모든 노래의 길이를 다 더한 값을 최대값(끝)으로 설정합니다. 
+            2. 이분 검색을 통해 해당하는 중간값이 dvd 길이라고 가정하고 최소 장수와 일치하는지 비교합니다. 
+
             
+        */
+
+        function count(value, songs) {
+            let max = value;
+            let sum=0;
+            let cnt=1;
+            for(let i=0; i<songs.length; i++) {
+                sum += songs[i];
+                if(sum >= max) {
+                    sum = 0;
+                    cnt++;
+                }
+            }
+            return cnt;
         }
+        function solution(dvd, music) {
+            let answer = 0;
+            let lt=rt=0;
+            lt = Math.max(...music);
+            //console.log(lt);
+            for(let x of music) rt += x;
+            //console.log(rt);
+            while(lt<=rt){
+                let mid=parseInt((lt+rt)/2);
+                //console.log(mid);
+                let cnt=count(mid, music);
+                //console.log(cnt);
+                if(cnt == dvd){
+                    answer=mid;
+                    break;
+                }
+                else if(cnt < dvd) rt=mid-1;
+                else lt=mid+1;
+            }
+
+            return answer;
+        }
+
+        // 풀이
+        function count2(songs, capacity){
+                let cnt=1, sum=0;
+                for(let x of songs){
+                    if(sum+x > capacity){
+                        cnt++;
+                        sum=x;
+                    }
+                    else sum+=x;
+                }
+                return cnt;
+            }
+            
+            function solution2(m, songs){
+                let answer;
+                let lt=Math.max(...songs);
+                let rt=songs.reduce((a, b)=>a+b, 0);
+                while(lt<=rt){
+                    let mid=parseInt((lt+rt)/2);
+                    if(count(songs, mid)<=m){
+                        answer=mid;
+                        rt=mid-1;
+                    }
+                    else{
+                        lt=mid+1;
+                    }
+                } 
+                return answer;
+            }
         let arr=[1, 2, 3, 4, 5, 6, 7, 8, 9];
         console.log(solution(3, arr));
     </script>

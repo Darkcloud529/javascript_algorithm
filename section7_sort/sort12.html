@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 해결하지 못한 문제 
+        /*
+            마굿간 문제
+            1. 마굿간의 위치 정보가 담긴 배열과 말의 개수를 입력받습니다. 
+            2. 입력 받은 말의 개수만큼 말을 마굿간에 배치했을때 가장 가까운 두 말의 거리가 최대가 될 수 있도록 합니다.
+            
+            풀이
+            1. 마굿간의 정보를 오름차순으로 정리합니다. 
+            2. 이분 검색을 활용해 두 마굿간 사이의 거리를 결정합니다. 
+            3. 마굿간 사이의 거리를 중간값으로 한 후 그때의 놓을 수 있는 말을 계산합니다. 
+            4. 첫 위치를 기준으로 그 다음 마굿간 사이의 거리가 3번에서 얻은 중간값보다 크거나 같은지 확인
+            만약 크거나 같다면 말의 수를 +1 상승시키고 기준 위치를 그 마굿간의 위치로 선정
+            5. 4번 과정으로 놓을 수 있는 말의 갯수를 구하고 이 값과 최초의 입력받은 말의 갯수를 비교
+            최초 입력값보다 크거나 같다면 answer에 mid 값을 저장한 후 시작점을 mid+1 시켜 한 번 더 확인
+            작다면 끝 값을 mid-1로 변경 후 재탐색합니다. 
+            6. 최종적으로 얻은 값은 반환
+        */
+        function count(stable, dist){
+               let cnt=1, ep=stable[0];
+               for(let i=1; i<stable.length; i++){
+                   if(stable[i]-ep>=dist){
+                       cnt++;
+                       ep=stable[i];
+                   }
+               }
+               return cnt;
+            }
+            function solution(c, stable){
+                let answer;
+                stable.sort((a, b)=>a-b);
+                let lt=1;
+                let rt=stable[stable.length-1];
+                while(lt<=rt){
+                    let mid=parseInt((lt+rt)/2);
+                    if(count(stable, mid)>=c){
+                        answer=mid;
+                        lt=mid+1;
+                    }
+                    else rt=mid-1;
+                }
+                return answer;
+            }
+        let arr=[1, 2, 8, 4, 9];
+        console.log(solution(3, arr));
+    </script>
+</body>
+</html>
