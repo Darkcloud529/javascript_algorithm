@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            재귀함수를 이용한 이진수 출력
+            - 재귀함수를 이용해 입력받은 숫자를 이진수로 출력하시오
+
+            해결
+            1. answer 빈 문자열을 만듭니다. 
+            2. DFS() 재귀함수를 만듭니다.
+            3. DFS() 재귀함수 내에는 입력받은 값이 0이면 return을 하고
+            0이 아니라면 입력받은 값을 2로 나눈 나머지를 answer에 더합니다. 
+        */
+        function solution(num) {
+            let answer =""
+            function DFS(v) {
+                if(v === 0) {
+                    return;
+                } else {
+                    DFS(parseInt(v/2));
+                    answer += v%2;
+                }
+            }
+            DFS(num);
+            return answer;
+        }
+        console.log(solution(11));
+    </script>
+</body>
+</html>
