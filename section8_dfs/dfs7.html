@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         /*
+            최대점수구하기
+            1. 점수와 시간 정보가 담긴 배열을 입력받습니다. 
+            위 배열은 문제를 푸는데 걸리는 시간과 그에 해당하는 점수 정보를 담고 있습니다. 
+            2. 정해진 시간도 입력받습ㄴ다. 
+            3. 정해진 시간동안 얻을 수 있는 최대점수를 출력하세요.
+
+            해결
+            1. DFS로 문제 해결
+            2. 바둑이 승차 문제처럼 최대 시간을 구합니다. 
+            3. 이와 동시에 그에 해당하는 점수를 계산합니다. 
+            4. 최대 시간이 한계 시간을 넘을 경우 그때의 최대 점수를 answer에 담아 출력
+        */
+        function solution(c, score, time) {
+            let answer=Number.MIN_SAFE_INTEGER;
+            let n = score.length;
+            function DFS(L, total, sum) {
+                if(sum>c) return;
+                if(L===n) {
+                    //console.log(sum);
+                    answer=Math.max(answer,total);
+                } else {
+                    DFS(L+1, total+score[L], sum+time[L]);
+                    DFS(L+1, total, sum);
+                }
+            }
+            DFS(0,0,0)
+            return answer;
+        }
+        let ps=[10, 25, 15, 6, 7];
+        let pt=[5, 12, 8, 3, 4]
+        console.log(solution(20, ps, pt));
+    </script>
+</body>
+</html>
