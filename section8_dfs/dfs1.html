@@ -17,13 +17,15 @@
             2. 재귀함수 안에서는 입력된 값이 0이 될때 반환합니다. 
             3. 0이 아니라면 입력된 값에 1식 감소한 값을 넣고 출력합니다. 
         */
+        // 풀이 추가 + 스택프레임 공부하기!!(중요)
         function solution(num) {
             function DFS(v) {
                 if(v === 0) {
-                    return;
+                    return; // 반환, 호출된 함수 종료 
                 } else {
+                    //console.log(v); // 3 2 1 로 출력
                     DFS(v-1);
-                    console.log(v);
+                    console.log(v); // 1 2 3 로 출력
                 }
             }
             DFS(num);

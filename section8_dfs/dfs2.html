@@ -25,7 +25,7 @@
                     return;
                 } else {
                     DFS(parseInt(v/2));
-                    answer += v%2;
+                    answer += String(v%2);
                 }
             }
             DFS(num);
