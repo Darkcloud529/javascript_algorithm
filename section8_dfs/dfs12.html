@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            조합의 경우의 수 (메모이제이션)
+            1. 
+        */
+        function solution(n,r) {
+            let answer=0;
+            let value = 1
+            let a,b,c;
+            function DFS(v, k) {
+                if(k===0 || v===0 ) return;
+                if(k>0 || v >0) {
+                    
+                } else {
+                    DFS(v-1, k-1);
+                    DFS(v-1, k);
+                    value = v * value;
+                }
+                return value;
+            }
+            DFS(n,r);
+            return answer;
+        }
+        console.log(solution(33,19));
+    </script>
+</body>
+</html>

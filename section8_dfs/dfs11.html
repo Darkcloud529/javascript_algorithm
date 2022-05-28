@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            팩토리얼
+            1. 자연수 N을 입력하면 팩토리얼 값(N!)을 출력합니다. 
+
+            해결
+            1. 재귀 함수를 이용, answer = 1 로 초기화
+            2. 입력값이 0이면 return
+            0이 아니면 DFS(v-1) 호출, 그리고 answer = v * 1 계산
+            3. answer 출력
+        */
+        function solution (n) {
+            let answer = 1;
+            function DFS(v) {
+                if(v===0) return; 
+                else {
+                    console.log(v);
+                    DFS(v-1);
+                    answer = v * answer;
+                }
+            }
+            DFS(n);
+            return answer;
+        }
+        console.log(solution(5));
+    </script>
+</body>
+</html>
