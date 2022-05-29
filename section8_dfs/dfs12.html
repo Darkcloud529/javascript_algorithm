@@ -10,27 +10,22 @@
     <script>
         /*
             조합의 경우의 수 (메모이제이션)
-            1. 
+            1. nCr = n-1Cr-1 + n-1Cr 로 공식 계산하기
         */
-        function solution(n,r) {
-            let answer=0;
-            let value = 1
-            let a,b,c;
-            function DFS(v, k) {
-                if(k===0 || v===0 ) return;
-                if(k>0 || v >0) {
-                    
-                } else {
-                    DFS(v-1, k-1);
-                    DFS(v-1, k);
-                    value = v * value;
+        function solution(n, r){         
+                let answer=[];
+                let dy= Array.from(Array(35), () => Array(35).fill(0));
+                
+                function DFS(n, r){
+                    if(dy[n][r]>0) return dy[n][r];
+                    if(n===r || r===0) return 1;
+                    else return dy[n][r]=DFS(n-1, r-1)+DFS(n-1, r);
                 }
-                return value;
+                answer=DFS(n, r);
+                return answer;
             }
-            DFS(n,r);
-            return answer;
-        }
-        console.log(solution(33,19));
+
+            console.log(solution(5, 3));
     </script>
 </body>
 </html>
