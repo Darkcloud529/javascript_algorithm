@@ -10,12 +10,13 @@
     <script>
         /*
             순열 구하기
-            1. 
+            1. N 이하의 자연수를 입력받습니다. 
+            2. 위 중 M개를 뽑아 일렬로 나열해 출력하시오
         */
         function solution(m, array) {
             let answer=[];
             let n = array.length;
-            let ch=Array.from({length:n}, ()=>0);
+            let ch=Array.from({length:n}, ()=>0); // 체크, 확인용 배열
                 let tmp=Array.from({length:m}, ()=>0);;
                 function DFS(L){
                     if(L===m){
@@ -24,10 +25,10 @@
                     else{
                         for(let i=0; i<n; i++){
                             if(ch[i]===0){
-                                ch[i]=1;
+                                ch[i]=1; // 체크하기 => 사용했다.
                                 tmp[L]=arr[i];
-                                DFS(L+1);
-                                ch[i]=0;
+                                DFS(L+1); // 다음 원소로 넘어가주기
+                                ch[i]=0; // 체크 해제 
                             }
                         }
                     }
