@@ -15,11 +15,13 @@
         function solution(n, r){         
                 let answer=[];
                 let dy= Array.from(Array(35), () => Array(35).fill(0));
+                // 35의 숫자는 여유를 주기 위함, 입력값에 따라 변경될 수 있음
+                // 각 경우의 수를 계산하면서 이미 계산한 내용은 저장하기 위해 이차원 배열로 만들어 진행
                 
                 function DFS(n, r){
-                    if(dy[n][r]>0) return dy[n][r];
+                    if(dy[n][r]>0) return dy[n][r]; // 이미 계산한 값이 있다면 해당 값 return
                     if(n===r || r===0) return 1;
-                    else return dy[n][r]=DFS(n-1, r-1)+DFS(n-1, r);
+                    else return dy[n][r]=DFS(n-1, r-1)+DFS(n-1, r); // nCr = n-1Cr-1 + n-1Cr  공식
                 }
                 answer=DFS(n, r);
                 return answer;
