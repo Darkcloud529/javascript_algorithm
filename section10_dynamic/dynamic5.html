@@ -8,12 +8,19 @@
 </head>
 <body>
     <script>
+            /*
+                최대점수 구하기 (냅색 알고리즘)
+                1. 문제의 개수 n과 제한시간 M이 주어집니다. 
+                2. 문제 점수와 푸는 시간의 정보가 담긴 배열을 입력받습니다. 
+                3. 제한 시간 안에 얻을 수 있는 최대 점수를 출력하시오.
+
+            */
           function solution(m, arr){  
                 let answer=0;
                 let dy=Array.from({length:m+1}, ()=>0);
                 for(let i=0; i<arr.length; i++){
-                    let ps=arr[i][0];
-                    let pt=arr[i][1];
+                    let ps=arr[i][0]; // 점수
+                    let pt=arr[i][1]; // 문제 푸는 시간
                     for(let j=m; j>=pt; j--){
                         dy[j]=Math.max(dy[j], dy[j-pt]+ps);
                     }
