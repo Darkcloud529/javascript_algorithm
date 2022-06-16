@@ -8,26 +8,34 @@
 </head>
 <body>
     <script>
+        /*
+            미로탈출
+            1. 미로를 입력받습니다. 0은 통로, 1은 벽입니다. 
+            2. 출발점 (1,1), 도착점은 (n,n)입니다.
+            3. 출발점에서 도착점까지의 갈 수 있는 경로의 총 개수를 출력하시오.
+        */
         function solution(board){  
             let answer=0;
-            let dx=[-1, 0, 1, 0];
-            let dy=[0, 1, 0, -1];
+            let dx=[-1, 0, 1, 0]; // 좌우 이동
+            let dy=[0, 1, 0, -1]; // 상하 이동
             function DFS(x, y){
                 if(x===6 && y===6) answer++;
                 else{
+                    // 상하좌우 탐색
                     for(let k=0; k<4; k++){
                         let nx=x+dx[k];
                         let ny=y+dy[k];
+                        // 이동해서 통로이고 미로 밖을 벗어나지 않을때
                         if(nx>=0 && nx<=6 && ny>=0 && ny<=6 && board[nx][ny]===0){
-                            board[nx][ny]=1;
-                            DFS(nx, ny);
-                            board[nx][ny]=0;
+                            board[nx][ny]=1; // 방문
+                            DFS(nx, ny); // 이후 탐색
+                            board[nx][ny]=0; // 방문한 곳 초기화
                         }
                     }
                 }
             }
-            board[0][0]=1;
-            DFS(0, 0);
+            board[0][0]=1; // 출발점 설정
+            DFS(0, 0); 
             return answer;
         }
 
