@@ -8,22 +8,29 @@
 </head>
 <body>
     <script>
+        /*
+            송아지 찾기(BFS: 상대탐색트리)
+            1. 현수와 송아지의 위치 정보를 입력받습니다. (1<= s,e <= 10000)
+            2. 현수와 송아지는 일직선상에 위치합니다. 
+            3. 현수는 앞으로 1칸, 뒤로 1칸, 앞으로 5칸 이렇게 3가지 경우로 이동이 가능합니다. 
+            4. 이때 현수가 송아지까지 갈수 있는 최소 거리  
+        */
         function solution(s, e){  
             let answer=0;
-            let ch=Array.from({length:10001}, ()=>0);
-            let dis=Array.from({length:10001}, ()=>0);
-            let queue=[];
-            queue.push(s);
-            ch[s]=1;
-            dis[s]=0;
+            let ch=Array.from({length:10001}, ()=>0); // 체크 배열
+            let dis=Array.from({length:10001}, ()=>0); // 트리 레벨 배열
+            let queue=[]; // 상대 탐색 트리 만들기 
+            queue.push(s); // 기준 위치 입력
+            ch[s]=1; // 현재 위치 체크하기
+            dis[s]=0; // 기준 위치의 레벨
             while(queue.length){
                 let x=queue.shift();
                 for(let nx of [x-1, x+1, x+5]){
-                    if(nx===e) return dis[x]+1;
+                    if(nx===e) return dis[x]+1; // 결과값은 현재 레벨에서 +1 한 값이다!
                     if(nx>0 && nx<=10000 && ch[nx]===0){
-                        ch[nx]=1;
-                        queue.push(nx);
-                        dis[nx]=dis[x]+1;
+                        ch[nx]=1; // 방문한 위치 체크하기 (중복 제외)
+                        queue.push(nx); // 큐에 배열 삽입
+                        dis[nx]=dis[x]+1; // 트리 레벨 증가 
                     }
                 }
             }
