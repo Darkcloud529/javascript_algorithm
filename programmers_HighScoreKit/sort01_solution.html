@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            K번째로 큰 수 
+            1. 배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다. 
+            2. 배열 array, [i,j,k]를 원소로 가진 2차원 배열 commands가 매개변수로 주어질 때, commands의 모든 원소에 대해 
+            앞서 설명한 연산을 적용했을 때 나온 결과를 배열에 담아 return 하도록 solution 함수를 작성해주세요.
+        */
+        function solution(array, commands) {
+            var answer = [];
+            let startNum=0, endNum=0;
+            let n = commands.length;
+            for(let i=0; i<n; i++) {
+                startNum = commands[i][0]-1; // 시작 위치
+                endNum = commands[i][1]; // 종료 위치
+                
+                let part = array.slice(startNum, endNum).sort((a,b) => a-b); // 배열 slice해 오름차순 정리
+                answer.push(part[commands[i][2]-1]); // k번째 숫자를 answer 배열에 입력
+            }
+            return answer;
+        }
+        let a = [1,5,2,6,3,7,4];
+        let b = [[2,5,3],[4,4,1],[1,7,3]];
+        console.log(solution2(a,b));
+
+        // 다른 사람 풀이 
+        function solution2(array, commands) {
+            return commands.map(command => {
+                const [sPosition, ePosition, position] = command;
+                const newArray = array
+                .filter((value,fIndex) => fIndex >= sPosition -1 && fIndex <= ePosition-1)
+                .sort((a,b) => a-b);
+                
+                console.log(newArray);
+                
+                return newArray[position -1];
+            });
+        }
+    </script>
+</body>
+</html>
