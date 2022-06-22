@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            가장 큰 수 
+            1. 0 또는 양의 정수가 주어졌을 때, 정수를 이어 붙여 만들 수 있는 가장 큰 수를 구하시오
+            2. 조건
+            numbers의 길이는 0 ~ 100,000 이하
+            numbers의 원소는 0 ~ 1,000이하
+            정답이 너무 클 수 있으니 문자열로 변환
+        */
+        function solution(numbers) {
+            var answer = '';
+            let temp = numbers
+                        .map((a) => String(a)) // 모든 numbers내 수를 문자열로 치환
+                        .sort((a,b) => b+a - (a+b)); 
+                        // 문자열에 따라 그대로 연결한 수(b+a) - 바꿔 연결한 수(a+b)가 양수이면
+                        // 순서 유지 및 정렬
+
+            // 만약 모든 숫가자 0인 경우 0을 출력
+            if(temp.every((a) => a ==='0')) {
+                return '0';
+            } else {
+                return temp.join('');
+            } 
+           
+            return answer;
+        }
+        let a = [3,30,34,5,9];
+        console.log(solution2(a));
+
+        // 다른 사람들 풀이
+        function solution2(numbers) {
+            var answer = numbers.map(v=>v+'')
+                                .sort((a,b) => (b+a)*1 - (a+b)*1)
+                                .join('');
+
+            return answer[0]==='0'?'0':answer;
+        }
+    </script> 
+</body>
+</html>
