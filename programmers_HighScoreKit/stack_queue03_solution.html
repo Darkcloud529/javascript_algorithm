@@ -29,18 +29,29 @@
         function solution(bridge_length, weight, truck_weights) {
             var answer = 0;
             let bridge = Array.from({length:bridge_length}, ()=>0);
-            console.log(bridge);
-            bridge.push(truck_weights.shift());
-            console.log(bridge);
-            let max = weight;
-            // while(truck_weights.length) {
-            //     let value = max - truck_weights[0];
-            //     if(value >= 0) {
+            let sum = bridge.reduce((a,b) => a+b,0);
+            do {
+                do {
+                    let max = weight;
+                    sum = bridge.reduce((a,b) => a+b,0);
+                    max = max-truck_weights[0]-sum;
+                    if(max >= 0) {
+                        bridge.shift();
+                        bridge.push(truck_weights.shift());
+                        answer++;
+                        console.log(bridge);
+                    } else {
+                        bridge.shift();
+                        bridge.push(0);
+                        answer++;
+                        console.log(bridge);
+                    } 
                     
-            //     } else {
-
-            //     }
-            // }
+                    sum = bridge.reduce((a,b) => a+b,0);
+                    console.log("합계 " + sum);
+                    console.log("경과된 시간" + answer);
+                } while(truck_weights.length>0)
+            }while(sum!=0) 
             return answer;
         }
         let a = 2;
