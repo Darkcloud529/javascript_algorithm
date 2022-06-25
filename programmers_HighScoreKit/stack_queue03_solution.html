@@ -30,28 +30,34 @@
             var answer = 0;
             let bridge = Array.from({length:bridge_length}, ()=>0);
             let sum = bridge.reduce((a,b) => a+b,0);
-            do {
-                do {
-                    let max = weight;
-                    sum = bridge.reduce((a,b) => a+b,0);
-                    max = max-truck_weights[0]-sum;
-                    if(max >= 0) {
-                        bridge.shift();
-                        bridge.push(truck_weights.shift());
-                        answer++;
-                        console.log(bridge);
-                    } else {
-                        bridge.shift();
-                        bridge.push(0);
-                        answer++;
-                        console.log(bridge);
-                    } 
-                    
-                    sum = bridge.reduce((a,b) => a+b,0);
-                    console.log("합계 " + sum);
-                    console.log("경과된 시간" + answer);
-                } while(truck_weights.length>0)
-            }while(sum!=0) 
+
+            // 수정해야할 사항
+            /*
+                1. 트럭이 다리 위를 지나가면 바로 다음 트럭이 다리로 이동
+                2. 다리 위에 트럭이 있을 경우 전부 이동 시키기 
+            */
+            
+            // do {
+            //     while(truck_weights.length>0){
+            //         let max = weight;
+            //         sum = bridge.reduce((a,b) => a+b,0);
+            //         max = max-truck_weights[0]-sum;
+            //         if(max >= 0) {
+            //             bridge.shift();
+            //             bridge.push(truck_weights.shift());
+            //             answer++;
+            //             console.log(bridge);
+            //         } else {
+            //             bridge.shift();
+            //             bridge.push(0);
+            //             answer++;
+            //             console.log(bridge);
+            //         } 
+            //     } 
+            //     sum = bridge.reduce((a,b) => a+b,0);
+            //     console.log("합계 " + sum);
+            //     console.log("경과된 시간" + answer);
+            // }while(sum!=0) 
             return answer;
         }
         let a = 2;
