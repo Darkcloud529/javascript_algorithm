@@ -48,6 +48,57 @@
         console.log(solution(arr));
         console.log(solution(arr2));
         console.log(solution(arr3));
+
+        // 네이버 풀이 추가
+        /*
+            배열을 처음부터 탐색하면서 전체 숫자들의 중복 횟수를 카운트하는 방법
+        */
+
+        function countOf(arr, value) { //---가 : 배열에서 특정한 숫자의 중복 횟수를 계산
+            var count = 0;
+            arr.forEach(element => {
+                if (element == value) count++;
+            });
+            return count;
+        }
+
+        function solution1(arr) {
+            var answer = [];
+            var set = new Set([]);
+            arr.forEach( element => {
+                if (set.has(element)) return;   //---나 : 이미 중복을 계산한 숫자는 제외하기 위해서 Set 에 넣어주고 포함 여부를 확인
+                set.add(element);
+                count = countOf(arr, element);  
+                if (count > 1) answer.push(count); //---다 : 주어진 조건에 맞춰서 중복 횟수가 1을 초과하는 경우만 출력할 배열에 추가
+            });
+            if (answer.length == 0) answer.push(-1); //---라 : 마지막 부분에서는 빈 배열인 경우에 -1을 추가
+            return answer;
+        }
+
+        /*
+            문제 해결하는 solution() 함수에서 입력으로 주어지는 배열을 처음부터 탐색하면서 중복 횟수를 카운트하는 방식은 풀이 방법1과 동일합니다.
+            countOf()라는 함수를 선언하는 대신에 Map을 활용해서 중복 횟수를 저장한다는 점이 다릅니다.
+        */
+        function solution2(arr) {
+            var answer = [];    
+            var map = new Map();
+            arr.forEach( element => {
+                if (map.has(element)) { //---가 : Map은 값만 순서대로 보관하는 배열과 다르게 특정한 키에 대한 값을 보관하는 방식입니다.
+                //이전에 키값을 지정한 적이 있는지 확인해서 있으면 중복 횟수를 +1 해서 다시 저장합니다.
+                    map.set(element, map.get(element) + 1);
+                }
+                else { //---나 : 만약 한 번도 나오지 않아서 Map에 없는 키라면, 중복 횟수를 1로 저장
+                    map.set(element, 1);
+                }        
+            });
+            map.forEach( (value) => {
+                if (value > 1) {    //---다 : Map에서 value값을 확인해서 1을 초과하는 경우만 결과 배열에 추가
+                    answer.push(value);
+                }
+            });
+            if (answer.length == 0) answer.push(-1); //---라 : 마지막 부분에서는 빈 배열인 경우에 -1을 추가
+            return answer;
+        }
     </script>
 </body>
 </html>
