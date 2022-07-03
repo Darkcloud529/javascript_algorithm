@@ -26,20 +26,36 @@
             computer[i][i]는 항상 1입니다.
         */
         function solution(n, computers) {
-            var answer = 0;
-            let graph = Array.from(Array(n+1), ()=>Array.from(n+1).fill(0));
+            // 무방향 그래프 탐색
+            // computers 무방향 그래프의 인접행렬
 
-            console.log(graph);
-            for(let i=0; i<computers.length; i++) {
-                for(let j=0; j<computers[i].length; j++) {
-                    if(computers[i][j] === 1) {
-                        graph[i+1][j+1] = 1;
+            var answer = 0;
+            
+            // 방문 확인 배열
+            let check = Array.from({length:n}, ()=>false);
+            
+            // 네트워크 연결 확인 DFS
+            function DFS(v) {
+                // 현재 위치 방문 체크
+                check[v] = true;
+                // 현재 위치를 기준으로 연결된 네트워크 확인
+                for(let i=0; i<computers.length; i++) {
+                    // 네트워크가 연결되어 있고 방문하지 않았던 곳이라면
+                    if(computers[v][i] && !check[i]) {
+                    DFS(i);
                     }
                 }
             }
+            
+            // 인접 행렬 전체 탐색
+            for(let i=0; i<computers.length; i++) {
+                // 방문하지 않은 곳이라면
+                if(!check[i]) {
+                    DFS(i);
+                    answer++;
+                }
+            }
 
-            //console.log(graph);
-            //그래프를 그리며 풀 수 있지 않을까?
             return answer;
         }
         let a = 3;
