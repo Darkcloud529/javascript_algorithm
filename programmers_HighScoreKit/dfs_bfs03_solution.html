@@ -39,7 +39,41 @@
 
             const arrLength = words.length;
             const check = Array.from({length:arrLength}, ()=>false);
-           
+            
+            function DFS(key, count) {
+                if(key === target) {
+                    console.log(key)
+                    console.log(count);
+                    answer = Math.min(answer, count);
+                } else {
+                    for(let i=0; i<key.length; i++) {
+                        let tArray = key.split("");
+                        tArray.splice(i,1);
+                        let x = tArray.reduce((a,b) => a+b);
+                        console.log("x : " + x);
+                        
+                        let wArray = [];
+                        for(let j=0; j<words.length; j++) {
+                            wArray.push(words[j].split(""));
+                            wArray[j].splice(i,1);
+                            wArray[j] = wArray[j].reduce((a,b) => a+b);
+                        }
+
+
+                        for(let k=0; k<wArray.length; k++) {
+                            if(x === wArray[k] && !check[k]) {
+                                check[k] = true;
+                                tArray.splice(i,0,words[k][i]);
+                                let part = tArray.reduce((a,b)=>a+b)
+                                console.log("part : " + part);
+                                DFS(part, count+1);
+                                check[k] = false;
+                            }
+                        }
+                    }
+                }
+            }
+            DFS(begin, 0);
             return answer;
         }
         const a = "hit";
