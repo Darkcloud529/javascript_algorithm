@@ -27,38 +27,64 @@
         */
         function solution(jobs) {
             var answer = 0;
-            let stack = [];
+            let workFlow = [];
             
+            jobs.sort((a,b) => {return a[0]-b[0]});
+            workFlow.push(jobs.shift());
+
             // 누적 시간 : cumulative time
             // 소요 시간 : the time required
             let reqTime = Number.MAX_SAFE_INTEGER;
-            let cumulativeTime = 0
+            let cumulativeTime = workFlow[0][1];
 
-            while(jobs.legnth>0) {
-                jobs.forEach(([start,end], index) => {
-                    // 초기 값 : 0 , 시작 시간 0초, 소요시간이 가장 작은 것을 기준
-                    // 
-                    if(cumulativeTime>=start && reqTime > (end-start)) {
-                        stack.push(jobs[index]);
-                        jobs.splice(index,1);
-                        reqTime = Number.MAX_SAFE_INTEGER;
-                    } else {    
-                        // 시간 시간 0초가 없는 경우, 순서대로 입력
-                        //         
-                        stack.push(jobs[0]);
-                        // 순차제거
-                        jobs.shift();
-                        // 누적 시간 계산 
-                        cumulativeTime += end;
-                    }
-                });
+            // 우선순위 큐 이용하기
+
+            while(jobs.length) {
+                // 누적 시간 다음에 바로 실행할 수 있는 작업이 있는지?
+                // 있다면 가장 소요 시간이 작은 걸 실행
+                // 만약 없다면 다음 순서 연결
+                if(nextStep(jobs, cumulativeTime)) {
+                    let objectIndex = 0;
+                    jobs.forEach(([stanby,take], index) => {
+                        if(cumulativeTime>=stanby && reqTime > take) {
+                            reqTime = take;
+                            objectIndex = index;
+                        }
+                    });
+                    cumulativeTime += (jobs[objectIndex][1]-jobs[objectIndex][0]);
+                    workFlow.push(jobs[objectIndex]);
+                    jobs.splice(objectIndex,1);
+                    reqTime = Number.MAX_SAFE_INTEGER;
+                } else {
+                    cumulativeTime = jobs[0][1];
+                    workFlow.push(jobs.shift());
+                }
             }
-            console.log(stack);
-            console.log(jobs);
+            console.log(workFlow);
+            // 총 걸리는 시간 계산하기
+            let totalTime = workFlow[0][1];
+            answer += totalTime;
+            console.log(answer);
+            for(let i=1 ; i<workFlow.length; i++) {
+                totalTime += workFlow[i][1] - workFlow[i][0] + workFlow[0][0];
+                console.log(totalTime);
+                answer += totalTime;
+            }
             return answer;
         }
-        let a = [[1, 3], [0, 5], [2, 6]];
+        
+        function nextStep (array, standard) {
+            let check = 0
+            array.forEach(([stanby,take], index) => {
+                if(standard>=stanby) {
+                    check++;
+                }
+            });
+            return check !== 0;
+        }
+        let a = [[0, 3], [1, 9], [2, 6]];
         console.log(solution(a));
+
         let b = [[1, 3], [1, 1], [2, 6]];
         console.log(solution(b));
     </script>
