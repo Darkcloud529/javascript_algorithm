@@ -25,62 +25,34 @@
             각 작업에 대해 작업의 소요시간은 1 이상 1,000 이하입니다.
             하드디스크가 작업을 수행하고 있지 않을 때에는 먼저 요청이 들어온 작업부터 처리합니다.
         */
-        function solution(jobs) {
+       function solution(jobs) {
             var answer = 0;
-            let workFlow = [];
-            
-            jobs.sort((a,b) => {return a[0]-b[0]});
-            workFlow.push(jobs.shift());
-
-            // 누적 시간 : cumulative time
-            // 소요 시간 : the time required
-            let reqTime = Number.MAX_SAFE_INTEGER;
-            let cumulativeTime = workFlow[0][1];
-
-            // 우선순위 큐 이용하기
-
-            while(jobs.length) {
-                // 누적 시간 다음에 바로 실행할 수 있는 작업이 있는지?
-                // 있다면 가장 소요 시간이 작은 걸 실행
-                // 만약 없다면 다음 순서 연결
-                if(nextStep(jobs, cumulativeTime)) {
-                    let objectIndex = 0;
-                    jobs.forEach(([stanby,take], index) => {
-                        if(cumulativeTime>=stanby && reqTime > take) {
-                            reqTime = take;
-                            objectIndex = index;
-                        }
-                    });
-                    cumulativeTime += (jobs[objectIndex][1]-jobs[objectIndex][0]);
-                    workFlow.push(jobs[objectIndex]);
-                    jobs.splice(objectIndex,1);
-                    reqTime = Number.MAX_SAFE_INTEGER;
-                } else {
-                    cumulativeTime = jobs[0][1];
-                    workFlow.push(jobs.shift());
+            jobs.sort((a,b)=>a[0]-b[0]);// 첫 작업은 가장 먼저오는 걸로
+            const pq=[];//우선 순위 큐 (시작이 가능한 일들이 들어가며 작업시간 오름차순정렬됨)
+            // 초기 인덱스 시간 설정
+            let i=0, time=0;
+            while(i<jobs.length || pq.length!=0){// 우선순위큐가 비어야 종료됨
+                if(i<jobs.length && jobs[i][0]<=time){
+                    // 해당 작업 우선 순위 큐에 넣고 인덱스 증가
+                    pq.push(jobs[i++]);
+                    // 만약 0으로 시작하는 작업이 2개 이상이면, 소요 시간이 짧은 작업순으로 배치
+                    pq.sort((a,b)=>a[1]-b[1]);
+                    // 이후 작업도 재개
+                    continue;
+                }
+                //현재 도착한 작업이 없을 때
+                //0으로 시작한 작업이 없는 경우 
+                if(pq.length===0){
+                    time=jobs[i][0]; //첫 작업을 현재 시간으로 바꿔준다.
+                }else{
+                    // 우선순위 큐에 작업이 있는 경우 
+                    const [start,work]=pq.shift();
+                    // 시간 계산
+                    answer+=time+work-start;
+                    time+=work;
                 }
             }
-            console.log(workFlow);
-            // 총 걸리는 시간 계산하기
-            let totalTime = workFlow[0][1];
-            answer += totalTime;
-            console.log(answer);
-            for(let i=1 ; i<workFlow.length; i++) {
-                totalTime += workFlow[i][1] - workFlow[i][0] + workFlow[0][0];
-                console.log(totalTime);
-                answer += totalTime;
-            }
-            return answer;
-        }
-        
-        function nextStep (array, standard) {
-            let check = 0
-            array.forEach(([stanby,take], index) => {
-                if(standard>=stanby) {
-                    check++;
-                }
-            });
-            return check !== 0;
+            return parseInt(answer/jobs.length);
         }
         let a = [[0, 3], [1, 9], [2, 6]];
         console.log(solution(a));
