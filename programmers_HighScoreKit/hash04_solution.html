@@ -34,11 +34,14 @@
             for(let i=0; i<genres.length; i++) {
                 obj[genres[i]] = (obj[genres[i]]||0) + plays[i];
             }
+            //let max = Math.max(obj);
+            for(let i in obj) {
+                console.log(i);
+            }
             let first = second = 0;
             let album = Math.floor(genres.length/2)*2;
-            while(answer>album) {
-                
-            }
+            // while(answer>album) {
+            // }
             return answer;
         }
         let a = ["classic", "pop", "classic", "classic", "pop"];
