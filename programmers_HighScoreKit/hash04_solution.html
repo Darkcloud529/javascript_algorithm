@@ -30,18 +30,15 @@
         */
         function solution(genres, plays) {
             var answer = [];
-            let obj = {};
+            let map = new Map();
             for(let i=0; i<genres.length; i++) {
-                obj[genres[i]] = (obj[genres[i]]||0) + plays[i];
+                if(map.has(genres[i])) {map.set(genres[i], map.get(genres[i])+plays[i]);} 
+                else {map.set(genres[i], plays[i]);}
             }
-            //let max = Math.max(obj);
-            for(let i in obj) {
-                console.log(i);
-            }
-            let first = second = 0;
-            let album = Math.floor(genres.length/2)*2;
-            // while(answer>album) {
-            // }
+            let max = map.values();
+            console.log(Math.max(...max));
+            const album = Math.floor(genres.length/2)*2;
+            while() {}
             return answer;
         }
         let a = ["classic", "pop", "classic", "classic", "pop"];
