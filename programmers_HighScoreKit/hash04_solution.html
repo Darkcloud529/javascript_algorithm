@@ -31,14 +31,45 @@
         function solution(genres, plays) {
             var answer = [];
             let map = new Map();
+            let album = 1;
+
             for(let i=0; i<genres.length; i++) {
                 if(map.has(genres[i])) {map.set(genres[i], map.get(genres[i])+plays[i]);} 
                 else {map.set(genres[i], plays[i]);}
             }
-            let max = map.values();
-            console.log(Math.max(...max));
-            const album = Math.floor(genres.length/2)*2;
-            while() {}
+
+            if(map.size !==1) {
+                album = Math.floor(genres.length/2)*2;
+            }
+            const sortMap = [...map];
+            sortMap.sort((a,b) => b[1] - a[1]);
+            console.log(sortMap[0][0]);
+
+            // 장르와 해당하는 노래를 answer에 어떻게 수록할지 고민해보기
+            while(album > answer.length) {
+                let first = sortMap[0][0];
+                let second = sortMap[1][0];
+                let findex = 0;
+                let fplaytime = 0;
+                let sindex = 0;
+                let splaytime = 0; 
+                for(let i=0; i<genres.length; i++) {
+                    if(genres[i] === first && fplaytime < plays[i]) {
+                        findex = i;
+                        continue;
+                    } else if(genres[i] === second && splaytime < plays[i]) {
+                        sindex = i;
+                    } continue;
+                }
+                sortMap[0][1] -= fplaytime;
+                sortMap[1][1] -= splaytime;
+                sortMap.sort((a,b) => b[1] - a[1]);
+
+                plays[findex] = 0;
+                plays[sindex] = 0;
+
+                answer.push(findex,sindex);
+            }
             return answer;
         }
         let a = ["classic", "pop", "classic", "classic", "pop"];
