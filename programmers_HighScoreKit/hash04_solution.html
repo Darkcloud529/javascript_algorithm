@@ -31,19 +31,84 @@
         function solution(genres, plays) {
             var answer = [];
             let map = new Map();
-            let album = Math.floor(genres.length/2)*2;
-
+            
+            // 장르별 재생된 길이 파악하기 위해 map을 만듬
             for(let i=0; i<genres.length; i++) {
                 if(map.has(genres[i])) {map.set(genres[i], map.get(genres[i])+plays[i]);} 
                 else {map.set(genres[i], plays[i]);}
             }
 
-            // 장르와 해당하는 노래를 answer에 어떻게 수록할지 고민해보기
+            // 장르에 해당하는 재생횟수가를 담기 위한 배열
+            let list = [];
+            
+            // 앨범에 노래 담는 작업
+            while(map.size>0) {
+                // 가장 많이 재생된 장르 설정
+                let genre = [...map.entries()].reduce((a,b) => a[1] > b[1] ? a:b)[0];
+
+                // 해당 장르에 속하는 노래 재생횟수 담기
+                genres.filter((v,i) => {
+                    if( v === genre) list.push(plays[i]);
+                });
+
+                // 그 중 내림차순으로 정리해 가장 많이 재생된 2 노래가 선별
+                list.sort((a,b) => b-a).splice(2);
+
+                // 만약 두 노래의 길이가 같다면
+                if(list[0] === list[1]) {
+                    // 인덱스가 빠른 노래를 담고
+                    plays.map((v,i) => {
+                        if(v === list[0]) answer.push(i);
+                    });
+                    // list 비우기
+                    list = [];
+                } else {
+                    // 만약 재생횟수가 다르다면
+                    while(list.length>0) {
+                        // 각 재생횟수에 해당하는 노래의 인덱스를 담기
+                        plays.forEach((v,i) => {
+                            if(v === list[0]) answer.push(i);
+                        })
+                        list.shift();
+                    }
+                }
+                // 해당 장르 제거 후 다음 장르
+                map.delete(genre);
+            }
             return answer;
         }
         let a = ["classic", "pop", "classic", "classic", "pop"];
         let b = [500, 600, 150, 800, 2500];
         console.log(solution(a,b));
+
+        // 다른 사람 풀이
+        function solution2(genres, plays) {
+            var dic = {};
+            // 장르별 노래 횟수 정리
+            genres.forEach((t,i)=> {
+                dic[t] = dic[t] ?  dic[t] + plays[i] :plays[i];        
+            });
+
+            var dupDic = {};
+            return genres
+                // 장르, 재생횟수, 인덱스를 정리해          
+                .map((t,i)=> ({genre : t, count:plays[i] , index:i}))
+                // 이를 정렬한다.
+                .sort((a,b)=>{
+                    // 두 장르가 다르다면 내림차순               
+                    if(a.genre !== b.genre) return dic[b.genre] - dic[a.genre];
+                    // 두 재생횟수가 다르면 내림차순
+                    if(a.count !== b.count) return b.count - a.count;
+                    // 인덱스는 오름차순
+                    return a.index - b.index;
+                })
+                .filter(t=>  {
+                    if(dupDic[t.genre] >= 2) return false;
+                    dupDic[t.genre] = dupDic[t.genre] ? dupDic[t.genre]+ 1 : 1;
+                    return true;
+                    })
+                .map(t=> t.index);    
+        }
     </script>
 </body>
 </html>
