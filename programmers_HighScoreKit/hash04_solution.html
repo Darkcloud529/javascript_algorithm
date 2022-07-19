@@ -103,6 +103,7 @@
                     return a.index - b.index;
                 })
                 .filter(t=>  {
+                    // 한 장르 안에서 2개 이상 나올 경우
                     if(dupDic[t.genre] >= 2) return false;
                     dupDic[t.genre] = dupDic[t.genre] ? dupDic[t.genre]+ 1 : 1;
                     return true;
