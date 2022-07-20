@@ -29,13 +29,35 @@
         */
         function solution(answers) {
             var answer = [];
-            // 시험 최대 10,000문제
-            const question = 10000;
+            let cnt = 0;
+            // 입력받은 answers의 길이가 문제의 길이
+            // 최대 문제는 10000
+            const question = answers.length;
+            let key=[]
+            while(key.length<question) {
+                for(let i=0; i<answers.length; i++) {
+                    key.push(answers[i]);
+                }
+            }
+            console.log(key);
             // 수포자 찍는 방식 
-            const student1 = [1,2,3,4,5];
-            const student2 = [2,1,2,3,2,4,2,5];
-            const student3 = [3,3,1,1,2,2,4,4,5,5];
-            
+            const student = [[1,2,3,4,5],[2,1,2,3,2,4,2,5],[3,3,1,1,2,2,4,4,5,5]];
+
+            while(cnt < 3) {
+                let result = []
+                let score = 0;
+                while(result.length < question) {
+                    for(let i=0; i<student[cnt].length; i++) {
+                        result.push(student[cnt][i]);
+                    }
+                }
+                for(let j=0; j<question; j++) {
+                    if(key[j] === result[j]) score++;
+                }
+                answer.push([cnt+1, score]);
+                cnt++;
+            }
+            // 정답을 가장 많이 맞춘 사람, 동률일때 결과 표시 생각해보기
             return answer;
         }
         let a = [1,2,3,4,5];
