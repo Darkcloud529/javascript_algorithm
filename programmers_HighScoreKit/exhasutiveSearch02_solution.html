@@ -23,9 +23,24 @@
         */
         function solution(numbers) {
             var answer = 0;
-            // 입력받은 종이의 숫자로 숫자 만들기
+            // 입력받은 종이의 숫자
+            let num = numbers.split('');
+            console.log(num);
+            // 숫자 조합하기
+
             // 소수 찾기
             return answer;
+        }
+        // 소수 판별 함수
+        function decimal(num) {
+            if(num <= 1) return false;
+            // for(let i=2; i < num; i++) {
+            //     if(num%i == 0 ) return false;
+            // }
+            for(let i=2; i<=parseInt(Math.sqrt(num)); i++) {
+                if(num%i === 0) return false;
+            }
+            return true;
         }
         let a = "17";
         let b = "011";
