@@ -22,31 +22,35 @@
             "013"은 0, 1, 3 숫자가 적힌 종이 조각이 흩어져있다는 의미입니다.
         */
         function solution(numbers) {
-            var answer = 0;
-            let list = []
-
-            // 입력받은 종이의 숫자
-            let num = numbers.split('');
-            console.log(num);
-            console.log(num.length);
-            const l = num.length;
-
-            // 숫자 조합하기
+            var answer = [];
+            let nums = numbers.split(''); 
             
-            console.log(list);
-            // 소수 찾기
-            return answer;
-        }
-        // 소수 판별 함수
-        function decimal(num) {
-            if(num <= 1) return false;
-            // for(let i=2; i < num; i++) {
-            //     if(num%i == 0 ) return false;
-            // }
-            for(let i=2; i<=parseInt(Math.sqrt(num)); i++) {
-                if(num%i === 0) return false;
+            // 소수 판별
+            const isPrimeNum = (num) => {
+                if(num<=1) return false;
+                for (let i = 2; i*i <= num; i++) {
+                    if (num % i === 0) return false;
+                }
+                return true;
             }
-            return true;
+            
+            // 순열 만들기
+            const getPermutation = (arr, fixed) => {
+                if(arr.length >= 1) {
+                    for (let i=0; i<arr.length; i++) {
+                        const newNum = fixed + arr[i];
+                        const copyArr = [...arr];
+                        copyArr.splice(i, 1);
+                        if (!answer.includes(+newNum) && isPrimeNum(+newNum)){
+                            answer.push(+newNum) 
+                        }
+                        getPermutation(copyArr, newNum); 
+                    }
+                }
+            }
+            
+            getPermutation(nums, '');
+            return answer.length;
         }
         let a = "17";
         let b = "011";
