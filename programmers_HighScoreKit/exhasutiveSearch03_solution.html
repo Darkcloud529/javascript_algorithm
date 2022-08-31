@@ -21,11 +21,15 @@
         */
         function solution(brown, yellow) {
             const total = brown + yellow;
-            let y = 3;
-            let x = parseInt(total/y);
-            while(y>=x) {
-                y++;
-                x = parseInt(total/y);
+            let x = 3;
+            let y = total/x;
+            while(y>x) {
+                x++;
+                y = total/x;
+                while(!Number.isInteger(y)) {
+                    x++;
+                    y = total/x;
+                }
             }
             const answer = [x,y];
             return answer;
