@@ -20,19 +20,14 @@
             카펫의 가로 길이는 세로 길이와 같거나, 세로 길이보다 깁니다.
         */
         function solution(brown, yellow) {
-            const total = brown + yellow;
-            let x = 3;
-            let y = total/x;
-            while(y>x) {
-                x++;
-                y = total/x;
-                while(!Number.isInteger(y)) {
-                    x++;
-                    y = total/x;
-                }
-            }
-            const answer = [x,y];
+            const size = brown + yellow
+            answer = widthHeightPair(size).filter(pair => (pair[0] + pair[1]) * 2 - 4 === brown)[0]
             return answer;
+        }
+        function widthHeightPair(size){
+            let result = []
+            for(let i=1; i<=Math.sqrt(size); i++) if(size % i === 0) result.push([size/i, i])
+            return result
         }
         console.log(solution(10,2));
         console.log(solution(8,1));
